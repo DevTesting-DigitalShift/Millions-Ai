@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { FloatingCube } from "@/components/floating-cube";
 
 export function Hero() {
   return (
@@ -61,6 +62,9 @@ export function Hero() {
           </div>
         </div>
       </div>
+
+      {/* Floating 3D Cube */}
+      <FloatingCube />
     </section>
   );
 }

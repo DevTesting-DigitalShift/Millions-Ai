@@ -198,6 +198,17 @@ export function TrustedInsights() {
           </div>
         </div>
       </div>
+
+      <div className="mx-auto container mt-20 w-full px-6">
+        <video
+          src="/video.mp4"
+          autoPlay
+          muted
+          loop
+          
+          className="w-full rounded-xl bg-black shadow-lg"
+        />
+      </div>
     </section>
   );
 }
