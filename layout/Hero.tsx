@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { FloatingCube } from "@/components/floating-cube";
+import { FloatingCube } from "@/layout/floating-cube";
 
 export function Hero() {
   return (

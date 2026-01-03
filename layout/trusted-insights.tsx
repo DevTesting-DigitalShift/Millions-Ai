@@ -199,13 +199,22 @@ export function TrustedInsights() {
         </div>
       </div>
 
-      <div className="mx-auto container mt-20 w-full px-6">
+      <div className="mx-auto container w-full px-6 mt-60">
+        <div className="mb-20 flex flex-col items-center space-y-6 text-center">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground leading-[1.1]">
+            Insights are powered by MAI’s revolutionary tech, MillionGraph™
+          </h2>
+
+          <p className="text-xl text-muted-foreground  leading-relaxed">
+            MillionGraph™ is the engine that connects AI agents, datasets, and
+            protocols into one living decision intelligence.
+          </p>
+        </div>
         <video
           src="/video.mp4"
           autoPlay
           muted
           loop
-          
           className="w-full rounded-xl bg-black shadow-lg"
         />
       </div>
