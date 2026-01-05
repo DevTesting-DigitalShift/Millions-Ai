@@ -46,10 +46,52 @@ const marketSignalsCards = [
 
 const MaiGridClient = () => {
   return (
-    <section className="container-section">
+    <main className="container-section">
+      <section className="relative flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div
+            className="absolute inset-0 opacity-40"
+            style={{
+              backgroundImage: `
+          linear-gradient(to right, rgba(0,0,0,0.15) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(0,0,0,0.15) 1px, transparent 1px)
+        `,
+              backgroundSize: "40px 40px",
+              maskImage:
+                "radial-gradient(circle at center, black 0%, black 65%, transparent 70%)",
+              WebkitMaskImage:
+                "radial-gradient(circle at center, black 0%, black 65%, transparent 70%)",
+            }}
+          />
+        </div>
+
+        <div className="relative z-10 text-center px-6 py-20 mx-auto mt-16">
+          <h1 className="text-5xl md:text-6xl font-semibold max-w-6xl text-foreground mb-6 leading-tight">
+            Skip the{" "}
+            <span className="font-sans text-[#002956]">
+              unMagical Quadrant
+              <sup className="text-3xl align-super ml-0.5">®</sup>
+            </span>
+            , prioritise what moves the needle
+          </h1>
+
+          <p className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto mb-8">
+            MAIGrid™ maps your business context, and delivers a personalized,
+            execution-ready AI roadmap—what to do now, pilot next, park the rest
+          </p>
+
+          <Button
+            size="lg"
+            className="bg-foreground text-background hover:bg-foreground/90 rounded-lg px-8 py-6 text-base font-semibold"
+          >
+            Discover Your UseCases →
+          </Button>
+        </div>
+      </section>
+
       <CompanyLogo />
 
-      <div className="px-6 py-20 mt-20">
+      <section className="px-6 py-20 mt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-16">
             <span className="text-foreground text-lg font-semibold bg-muted-foreground/10 px-4 py-2 rounded-md">
@@ -93,9 +135,9 @@ const MaiGridClient = () => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="px-6 py-20 bg-linear-to-br from-background via-muted/20 to-background">
+      <section className="px-6 py-20 bg-linear-to-br from-background via-muted/20 to-background">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="relative">
             <div className="relative bg-black rounded-lg shadow-2xl overflow-hidden h-120">
@@ -131,9 +173,9 @@ const MaiGridClient = () => {
             </Button>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="px-6 py-20">
+      <section className="px-6 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-16">
             <span className="text-foreground text-lg font-semibold bg-muted-foreground/10 px-4 py-2 rounded-md">
@@ -170,7 +212,7 @@ const MaiGridClient = () => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       <section className="overflow-hidden px-6 pt-36 pb-20">
         <div className="mb-16 text-center max-w-5xl mx-auto">
@@ -226,7 +268,7 @@ const MaiGridClient = () => {
         title="Heres what leaders are saying"
         breakTitle="about MAIGrid™"
       />
-    </section>
+    </main>
   );
 };
 

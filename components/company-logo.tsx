@@ -1,6 +1,6 @@
 const CompanyLogo = () => {
   return (
-    <div className="mt-20 text-center">
+    <section className="mt-20 text-center">
       <p className="text-sm text-muted-foreground uppercase tracking-wider mb-6 font-bold">
         Evaluated 5,000+ leading AI Agents across business functions
       </p>
@@ -24,7 +24,7 @@ const CompanyLogo = () => {
         <Logo name="Dropbox" />
         <Logo name="Verkada" />
       </div>
-    </div>
+    </section>
   );
 };
 
