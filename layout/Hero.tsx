@@ -9,12 +9,12 @@ export function Hero() {
         <div className="text-center">
           <div className="bg-[#FAEFE0] border-[#F3D7B2] border  w-full h-full py-24 rounded-3xl ">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight mb-6">
-              Adopt AI that Aligns <br /> with you process | priorities |
-              context
+              Adopt AI that Aligns with your business Process. Priorities.
+              Context
             </h1>
 
             <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-5xl mx-auto my-12 mt-14">
-              World’s most comprehensive AI Guide, powered by revolutionary{" "}
+              From use-case prioritization to vendor evaluation—powered by{" "}
               <span className="font-bold text-black/75 tracking-wide">
                 MillionGraph™
               </span>

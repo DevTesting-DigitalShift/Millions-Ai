@@ -3,14 +3,13 @@ import { Button } from "@/components/ui/button";
 
 export default function GuideSection() {
   return (
-    <div className="bg-white/50">
+    <div className="bg-linear-to-br from-background via-muted/20 to-background/60">
       <section className="mx-auto max-w-7xl px-6 py-36">
         <div className="grid grid-cols-1 items-center gap-20 lg:grid-cols-[1.3fr_0.7fr]">
           {/* LEFT CONTENT */}
           <div>
             <h2 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl lg:text-6xl leading-[1.1] ">
-              Million AI isn’t just a database
-              <br />– it’s a guide
+              Million AI isn’t just a database – it’s a guide
             </h2>
 
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">

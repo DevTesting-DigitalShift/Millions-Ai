@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Header } from "@/components/header";
 import Footer from "@/components/footer";
-import { myFont } from "@/lib/fonts";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,6 +13,39 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const roobert = localFont({
+  src: [
+    {
+      path: "../public/fonts/RoobertTRIAL-Light-BF67243fd502239.otf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/RoobertTRIAL-Regular-BF67243fd53fdf2.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/RoobertTRIAL-Medium-BF67243fd53e059.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/RoobertTRIAL-SemiBold-BF67243fd54213d.otf",
+      weight: "600",
+      style: "normal",
+    },
+  ],
+  variable: "--font-roobert",
+});
+
+const graphik = localFont({
+  src: "../public/fonts/Graphik-Regular-Trial.otf",
+  weight: "400",
+  style: "normal",
+  variable: "--font-graphik",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +61,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${myFont.variable} antialiased`}
+        className={`${roobert.variable} ${graphik.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{ fontFamily: "var(--font-roobert)" }}
       >
         <Header />
         {children}

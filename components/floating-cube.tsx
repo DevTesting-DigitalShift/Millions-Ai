@@ -1,115 +1,116 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import "./floating-cube.css";
 
 const carouselData = [
   {
     id: 1,
-    title: "Reduction in excess inventory",
-    metric: "20%",
-    description: "Optimized supply chain management",
-    bgColor: "bg-lime-400",
-    accentColor: "bg-lime-600",
+    title: "Increase in on-time delivery",
+    metric: "70%",
+    image:
+      "https://delivery-p141552-e1488202.adobeaemcloud.com/adobe/assets/urn:aaid:aem:9ce1de3d-ca32-44a9-8998-73c55943223a/as/Image_Photo_commercial_squareValue_automotive.jpg?width=750&format=jpg&optimize=medium&preferwebp=true",
   },
   {
     id: 2,
-    title: "Improved delivery time",
-    metric: "35%",
-    description: "Faster logistics and routing",
-    bgColor: "bg-blue-400",
-    accentColor: "bg-blue-600",
+    title: "Total value realized by Celonis customers",
+    metric: "$6.5bn",
+    image:
+      "https://delivery-p141552-e1488202.adobeaemcloud.com/adobe/assets/urn:aaid:aem:73b8ca18-fb92-4f2b-a1f8-925b55f0595c/as/Image_Photo_commercial_squareValue_road.jpg?width=750&format=jpg&optimize=small&preferwebp=true",
   },
   {
     id: 3,
-    title: "Cost savings achieved",
-    metric: "45%",
-    description: "Reduced operational expenses",
-    bgColor: "bg-violet-400",
-    accentColor: "bg-violet-600",
+    title: "Increase in invoices processed through AI-powered automation",
+    metric: "66%",
+    image:
+      "https://delivery-p141552-e1488202.adobeaemcloud.com/adobe/assets/urn:aaid:aem:4a0f2690-0bec-4b77-8d2b-8ffde6fe3e76/as/Image_Photo_commercial_squareValue_ai.jpg?width=750&format=jpg&optimize=medium&preferwebp=true",
   },
   {
     id: 4,
-    title: "Process efficiency gain",
-    metric: "50%",
-    description: "Streamlined workflows",
-    bgColor: "bg-amber-400",
-    accentColor: "bg-amber-600",
+    title: "Process automation opportunities discovered and implemented",
+    metric: "1,100+",
+    image:
+      "https://delivery-p141552-e1488202.adobeaemcloud.com/adobe/assets/urn:aaid:aem:5b9ab914-88a6-4fed-807d-aa7910df26a0/as/Image_Photo_commercial_squareValue_it.jpg?width=750&format=jpg&optimize=medium&preferwebp=true",
   },
 ];
 
 export function FloatingCube() {
-  const [index, setIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
+  const [rotation, setRotation] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    const showTimer = setTimeout(() => setIsVisible(true), 10);
+
     const timer = setInterval(() => {
-      setDirection(1);
-      setIndex((i) => (i + 1) % carouselData.length);
+      setRotation((r) => r - 90);
     }, 4000);
-    return () => clearInterval(timer);
+
+    return () => {
+      clearTimeout(showTimer);
+      clearInterval(timer);
+    };
   }, []);
 
-
-  const current = carouselData[index];
-
-  const variants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 300 : -300,
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-    },
-    exit: (direction: number) => ({
-      x: direction > 0 ? -300 : 300,
-      opacity: 0,
-    }),
-  };
-
   return (
-    <div className="absolute bottom-2 right-8 hidden lg:block pointer-events-auto z-50">
-      <div className="relative w-80 h-64 rounded-2xl overflow-hidden">
-        <AnimatePresence initial={false} custom={direction} mode="wait">
-          <motion.div
-            key={index}
-            custom={direction}
-            variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { type: "spring", stiffness: 300, damping: 30 },
-              opacity: { duration: 0.3 },
-            }}
-            className={`absolute inset-0 ${current.bgColor} p-8 flex flex-col justify-between`}
+    <div className={`fragment-wrapper ${isVisible ? "show" : ""}`}>
+      <div className="cube-container">
+        {/* Image Cube */}
+        <div className="cube-scene">
+          <div
+            className="cube"
+            style={{ "--rotation": `${rotation}deg` } as React.CSSProperties}
           >
-            {/* Top section */}
-            <div>
+            {carouselData.map((item, index) => (
               <div
-                className={`w-16 h-1 ${current.accentColor} rounded-full mb-4`}
-              />
-              <h3 className="text-black text-lg font-semibold leading-tight">
-                {current.title}
-              </h3>
-            </div>
+                key={`img-${item.id}`}
+                className="cube-face cube-face-image"
+                style={{ "--face-index": index } as React.CSSProperties}
+              >
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover"
+                  loading={index === 2 ? "eager" : "lazy"}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
 
-            {/* Middle section - Metric */}
-            <div className="flex-1 flex items-center justify-center">
-              <p className="text-black text-8xl font-bold tracking-tight">
-                {current.metric}
-              </p>
-            </div>
-
-            {/* Bottom section */}
-            <div>
-              <p className="text-black/80 text-sm font-medium">
-                {current.description}
-              </p>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+        {/* Text Cube */}
+        <div className="cube-scene">
+          <div
+            className="cube"
+            style={{ "--rotation": `${rotation}deg` } as React.CSSProperties}
+          >
+            {carouselData.map((item, index) => (
+              <div
+                key={`text-${item.id}`}
+                className="cube-face cube-face-text"
+                style={{ "--face-index": index } as React.CSSProperties}
+              >
+                <p className="dark-square title">{item.title}</p>
+                <p aria-label={item.metric}>
+                  <span aria-hidden="true" className="word-wrap-square">
+                    <span className="char-wrapper">
+                      {item.metric.split("").map((char, charIndex) => (
+                        <span
+                          key={charIndex}
+                          className="char-square"
+                          style={{
+                            transitionDelay: `${charIndex * 0.02}s`,
+                          }}
+                        >
+                          {char}
+                        </span>
+                      ))}
+                    </span>
+                  </span>
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -54,7 +54,8 @@ export function TrustedInsights() {
         {/* Left Content */}
         <div className="mb-20 flex flex-col items-center space-y-6 text-center">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground leading-[1.1]">
-            Accelerate AI adoption with Trusted Insights
+            From business context mapping to AI vendor shortlist - the ARC
+            framework
           </h2>
 
           <p className="text-xl text-muted-foreground  leading-relaxed">
@@ -205,9 +206,11 @@ export function TrustedInsights() {
             Insights are powered by MAI’s revolutionary tech, MillionGraph™
           </h2>
 
-          <p className="text-xl text-muted-foreground  leading-relaxed">
-            MillionGraph™ is the engine that connects AI agents, datasets, and
-            protocols into one living decision intelligence.
+          <p className="text-xl text-muted-foreground max-w-6xl mx-auto leading-relaxed">
+            MillionGraph™ is the engine that powers the MillionAI platform. It
+            seamlessly connects and analyses over 120+ datapoints across GenAI
+            vendors, Analyst views & AI Adoption signals and converts them into
+            one living decision intelligence.
           </p>
         </div>
         <video

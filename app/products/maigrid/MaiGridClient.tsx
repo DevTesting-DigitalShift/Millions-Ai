@@ -46,8 +46,8 @@ const marketSignalsCards = [
 
 const MaiGridClient = () => {
   return (
-    <main className="container-section">
-      <section className="relative flex items-center justify-center overflow-hidden">
+    <main>
+      <section className="container-section relative flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div
             className="absolute inset-0 opacity-40"
@@ -68,7 +68,7 @@ const MaiGridClient = () => {
         <div className="relative z-10 text-center px-6 py-20 mx-auto mt-16">
           <h1 className="text-5xl md:text-6xl font-semibold max-w-6xl text-foreground mb-6 leading-tight">
             Skip the{" "}
-            <span className="font-sans text-[#002956]">
+            <span className="font-graphik text-[#002956]">
               unMagical Quadrant
               <sup className="text-3xl align-super ml-0.5">®</sup>
             </span>
@@ -91,7 +91,7 @@ const MaiGridClient = () => {
 
       <CompanyLogo />
 
-      <section className="px-6 py-20 mt-20">
+      <section className="container-section px-6 py-20 mt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-16">
             <span className="text-foreground text-lg font-semibold bg-muted-foreground/10 px-4 py-2 rounded-md">
@@ -137,8 +137,8 @@ const MaiGridClient = () => {
         </div>
       </section>
 
-      <section className="px-6 py-20 bg-linear-to-br from-background via-muted/20 to-background">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <section className="px-6 py-20 bg-linear-to-br from-background via-muted/20 to-background/60">
+        <div className="container-section grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="relative">
             <div className="relative bg-black rounded-lg shadow-2xl overflow-hidden h-120">
               <img
@@ -175,7 +175,7 @@ const MaiGridClient = () => {
         </div>
       </section>
 
-      <section className="px-6 py-20">
+      <section className="container-section px-6 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-16">
             <span className="text-foreground text-lg font-semibold bg-muted-foreground/10 px-4 py-2 rounded-md">
@@ -214,7 +214,7 @@ const MaiGridClient = () => {
         </div>
       </section>
 
-      <section className="overflow-hidden px-6 pt-36 pb-20">
+      <section className="container-section overflow-hidden px-6 pt-36 pb-20">
         <div className="mb-16 text-center max-w-5xl mx-auto">
           <h2 className="text-5xl md:text-6xl font-semibold text-foreground mb-6">
             MAIGrid isint just a usecase list — it s a personalized decision
