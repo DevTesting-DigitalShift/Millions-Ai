@@ -38,8 +38,8 @@ export function Header() {
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="w-[200px]">
-                      <ListItem href="#" title="MAIGrid™" />
-                      <ListItem href="#" title="MAIGent™" />
+                      <ListItem href="/products/maigrid" title="MAIGrid™" />
+                      <ListItem href="/products/maigent" title="MAIGent™" />
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>

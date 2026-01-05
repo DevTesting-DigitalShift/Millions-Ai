@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 export default function GuideSection() {
   return (
     <div className="bg-white/50">
-      <section className="mx-auto container px-6 py-36">
+      <section className="mx-auto max-w-7xl px-6 py-36">
         <div className="grid grid-cols-1 items-center gap-20 lg:grid-cols-[1.3fr_0.7fr]">
           {/* LEFT CONTENT */}
           <div>

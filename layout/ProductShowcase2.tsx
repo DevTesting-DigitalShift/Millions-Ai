@@ -220,7 +220,7 @@ function NetworkAnimation() {
 export function ProductShowcase2() {
   return (
     <section className="py-36">
-      <div className="container mx-auto px-6">
+      <div className="container-section px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Side - Content */}
           <div className="space-y-8">

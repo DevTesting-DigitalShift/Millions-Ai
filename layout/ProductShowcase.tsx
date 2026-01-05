@@ -29,11 +29,10 @@ export function ProductShowcase() {
 
   return (
     <section className="py-36">
-      <div className="container mx-auto px-6">
+      <div className="container-section px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Side - Animation */}
           <div className="relative">
-
             {/* Product Interface Animation */}
             <div className="relative bg-black rounded-2xl p-8 shadow-2xl min-h-[600px] flex items-center justify-center">
               <div className="w-full max-w-md">
@@ -187,12 +186,18 @@ export function ProductShowcase() {
             {/* Testimonial */}
             <div className="bg-white border border-gray-200 rounded-xl p-6">
               <p className="text-sm text-foreground italic mb-4">
-                "Game-changer. Without this, we'd have spent millions on
-                consulting—or settled for cookie-cutter quadrants"
+                &quot;Game-changer. Without this, we&apos;d have spent millions
+                on consulting—or settled for cookie-cutter quadrants&quot;
               </p>
 
               <div className="flex justify-end gap-3">
-                <Image src="/avatar.jpg" alt="" width={50} height={50} className="rounded-md" />
+                <Image
+                  src="/avatar.jpg"
+                  alt=""
+                  width={50}
+                  height={50}
+                  className="rounded-md"
+                />
                 <div className="mt-4">
                   <p className="text-sm font-semibold text-foreground">
                     Peter Dunes

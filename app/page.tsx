@@ -1,9 +1,9 @@
-import { TrustedInsights } from "@/layout/trusted-insights";
+import { TrustedInsights } from "@/layout/TrustedInsights";
 import { Hero } from "@/layout/Hero";
 import Testimonials from "@/layout/Testimonials";
 import GuideSection from "@/layout/GuideSection";
-import { ProductShowcase } from "@/layout/product-showcase";
-import { ProductShowcase2 } from "@/layout/Scroll5";
+import { ProductShowcase } from "@/layout/ProductShowcase";
+import { ProductShowcase2 } from "@/layout/ProductShowcase2";
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
       <GuideSection />
       <ProductShowcase />
       <ProductShowcase2 />
-      <Testimonials />
+      <Testimonials title="Practitioners are raving" breakTitle="about us" />
     </main>
   );
 }

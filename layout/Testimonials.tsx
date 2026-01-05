@@ -52,7 +52,12 @@ const testimonials = [
   },
 ];
 
-export default function Testimonials() {
+type TitleProps = {
+  title: string;
+  breakTitle: string;
+};
+
+export default function Testimonials({ title, breakTitle }: TitleProps) {
   const [index, setIndex] = useState(0);
 
   const CARD_WIDTH = 420;
@@ -72,12 +77,11 @@ export default function Testimonials() {
 
   return (
     <section className="overflow-hidden px-6 py-36">
-      {/* Header */}
-      <div className="mx-auto mb-12 flex container items-start justify-between">
+      <div className="mx-auto mb-12 flex max-w-7xl items-start justify-between">
         <h2 className="text-5xl font-semibold text-zinc-900">
-          Practitioners are raving
-          <br />
-          about us
+          {title}
+          <br className="mt-1" />
+          {breakTitle}
         </h2>
 
         <div className="flex gap-3 mt-8">
@@ -99,7 +103,7 @@ export default function Testimonials() {
       </div>
 
       {/* Horizontal Track */}
-      <div className="relative mx-auto container mt-20">
+      <div className="relative mx-auto max-w-7xl mt-20">
         <div
           className="flex transition-transform duration-500 ease-out"
           style={{
@@ -110,7 +114,7 @@ export default function Testimonials() {
             <div
               key={i}
               className={`mr-6 flex h-[350px] w-[580px] shrink-0 flex-col justify-between rounded-sm p-6 cursor-pointer hover:shadow-xl ${t.color}`}
-            > 
+            >
               <div>
                 <p className="text-xl font-medium leading-relaxed text-primary">
                   “{t.quote}”
@@ -126,7 +130,9 @@ export default function Testimonials() {
 
                   <div className="mt-5">
                     <p className="font-medium text-lg">{t.name}</p>
-                    <p className="text-sm font-medium text-primary/80">{t.role}</p>
+                    <p className="text-sm font-medium text-primary/80">
+                      {t.role}
+                    </p>
                   </div>
                 </div>
               </div>

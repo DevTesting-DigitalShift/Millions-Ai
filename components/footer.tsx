@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#FFF8EE]">
       {/* CTA Section */}
-      <div className="mx-auto container px-6 pt-28 pb-20 text-center">
+      <div className="mx-auto max-w-7xl px-6 pt-28 pb-20 text-center">
         <h2 className="text-5xl font-semibold tracking-tight text-zinc-900">
           You are serious about your AI, right?
         </h2>
@@ -20,7 +20,7 @@ export default function Footer() {
       </div>
 
       {/* Links Section */}
-      <div className="w-full pb-10 max-w-7xl mx-auto">
+      <div className="w-full pb-10 container-section">
         <div className="bg-[#FAEFE0] border-[#F3D7B2] border  w-full h-full py-14 pl-20 rounded-3xl">
           <div className="grid grid-cols-2 gap-12 text-sm sm:grid-cols-3 md:grid-cols-5">
             {/* Products */}
@@ -79,9 +79,7 @@ export default function Footer() {
 
             {/* Legal */}
             <div>
-              <h3 className="mb-4 font-semibold text-xl text-primary">
-                Legal
-              </h3>
+              <h3 className="mb-4 font-semibold text-xl text-primary">Legal</h3>
               <ul className="space-y-2 text-primary/70 cursor-pointer font-medium">
                 <li>Privacy</li>
                 <li>Terms of Use</li>
