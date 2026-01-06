@@ -196,7 +196,7 @@ export function ProductShowcase() {
                   alt=""
                   width={50}
                   height={50}
-                  className="rounded-md"
+                  className="rounded-lg"
                 />
                 <div className="mt-4">
                   <p className="text-sm font-semibold text-foreground">

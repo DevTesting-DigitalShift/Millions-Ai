@@ -1,8 +1,8 @@
 .fragment-wrapper {
   visibility: hidden;
   position: absolute;
-  top: 22rem;
-  right: 2rem;
+  top: 19rem;
+  right: 2.6rem;
   z-index: 50;
 }
 

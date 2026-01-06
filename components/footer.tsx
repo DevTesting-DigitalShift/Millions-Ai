@@ -8,7 +8,7 @@ export default function Footer() {
         </h2>
 
         <div className="mt-10 flex flex-col items-center gap-6">
-          <button className="rounded-md bg-primary text-primary-foreground hover:bg-primary/90 px-7 py-3 text-sm font-medium shadow-sm transition hover:opacity-90">
+          <button className="rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 px-7 py-3 text-sm font-medium shadow-sm transition hover:opacity-90">
             Meet your AI →
           </button>
 

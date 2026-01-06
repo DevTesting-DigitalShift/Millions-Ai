@@ -121,7 +121,7 @@ export function Header() {
             >
               Login
             </Link>
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-6 py-5 text-base font-semibold">
+            <Button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-6 py-5 text-base font-semibold">
               Sign up →
             </Button>
           </div>
@@ -141,7 +141,7 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "block rounded-md p-3 mb-1 no-underline outline-none transition-colors",
+            "block rounded-lg p-3 mb-1 no-underline outline-none transition-colors",
             className
           )}
           {...props}

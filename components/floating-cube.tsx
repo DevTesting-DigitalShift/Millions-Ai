@@ -35,14 +35,20 @@ const carouselData = [
 ];
 
 export function FloatingCube() {
-  const [rotation, setRotation] = useState(0);
+  const [imageRotation, setImageRotation] = useState(0);
+  const [textRotation, setTextRotation] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const showTimer = setTimeout(() => setIsVisible(true), 10);
 
     const timer = setInterval(() => {
-      setRotation((r) => r - 90);
+      setImageRotation((r) => r - 90);
+
+      const textDelay = 1000 + Math.random() * 1000;
+      setTimeout(() => {
+        setTextRotation((r) => r - 90);
+      }, textDelay);
     }, 4000);
 
     return () => {
@@ -54,11 +60,12 @@ export function FloatingCube() {
   return (
     <div className={`fragment-wrapper ${isVisible ? "show" : ""}`}>
       <div className="cube-container">
-        {/* Image Cube */}
         <div className="cube-scene">
           <div
-            className="cube"
-            style={{ "--rotation": `${rotation}deg` } as React.CSSProperties}
+            className="cube cube-image"
+            style={
+              { "--rotation": `${imageRotation}deg` } as React.CSSProperties
+            }
           >
             {carouselData.map((item, index) => (
               <div
@@ -77,11 +84,12 @@ export function FloatingCube() {
           </div>
         </div>
 
-        {/* Text Cube */}
         <div className="cube-scene">
           <div
-            className="cube"
-            style={{ "--rotation": `${rotation}deg` } as React.CSSProperties}
+            className="cube cube-text"
+            style={
+              { "--rotation": `${textRotation}deg` } as React.CSSProperties
+            }
           >
             {carouselData.map((item, index) => (
               <div

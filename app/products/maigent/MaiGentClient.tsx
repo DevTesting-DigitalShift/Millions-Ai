@@ -89,7 +89,7 @@ const MaiGentClient = () => {
       <section className="container-section px-6 py-20 mt-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-16">
-            <span className="text-foreground text-lg font-semibold bg-muted-foreground/10 px-4 py-2 rounded-md">
+            <span className="text-foreground text-lg font-semibold bg-muted-foreground/10 px-4 py-2 rounded-lg">
               Score
             </span>
             <div className="mt-6">
@@ -136,7 +136,7 @@ const MaiGentClient = () => {
           </div>
 
           <div className="space-y-16">
-            <span className="text-foreground text-lg font-semibold bg-muted-foreground/10 px-4 py-2 rounded-md">
+            <span className="text-foreground text-lg font-semibold bg-muted-foreground/10 px-4 py-2 rounded-lg">
               Profiles
             </span>
             <div className="mt-6">
@@ -163,7 +163,7 @@ const MaiGentClient = () => {
       <section className="container-section px-6 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-16">
-            <span className="text-foreground text-lg font-semibold bg-muted-foreground/10 px-4 py-2 rounded-md">
+            <span className="text-foreground text-lg font-semibold bg-muted-foreground/10 px-4 py-2 rounded-lg">
               Align
             </span>
             <div className="mt-6">

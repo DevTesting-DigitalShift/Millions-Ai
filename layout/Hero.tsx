@@ -7,7 +7,7 @@ export function Hero() {
     <section className="relative flex items-center justify-center overflow-hidden pt-20">
       <div className="w-full px-6 relative z-10">
         <div className="text-center">
-          <div className="bg-[#FAEFE0] border-[#F3D7B2] border  w-full h-full py-24 rounded-3xl ">
+          <div className="bg-[#FAEFE0] border-[#F3D7B2] border w-full h-140 py-24 rounded-3xl">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight mb-6">
               Adopt AI that Aligns with your business Process. Priorities.
               Context

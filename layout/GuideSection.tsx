@@ -6,7 +6,6 @@ export default function GuideSection() {
     <div className="bg-linear-to-br from-background via-muted/20 to-background/60">
       <section className="mx-auto max-w-7xl px-6 py-36">
         <div className="grid grid-cols-1 items-center gap-20 lg:grid-cols-[1.3fr_0.7fr]">
-          {/* LEFT CONTENT */}
           <div>
             <h2 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl lg:text-6xl leading-[1.1] ">
               Million AI isn’t just a database – it’s a guide
@@ -23,7 +22,6 @@ export default function GuideSection() {
               The result: AI which can drive and deliver the promised ROI.
             </p>
 
-            {/* CTA */}
             <div className="mt-10 flex items-center gap-6">
               <Button
                 size="lg"
@@ -37,16 +35,12 @@ export default function GuideSection() {
                 Ask the Expert
               </button>
             </div>
-
-            {/* CONNECTOR / BREAKER */}
-            <div className="mt-16 h-px w-40 bg-gradient-to-r from-transparent via-muted-foreground/40 to-transparent" />
           </div>
 
-          {/* RIGHT VISUAL */}
           <div className="relative flex justify-center lg:justify-end">
-            <div className="relative aspect-square w-full ">
+            <div className="relative aspect-square w-160 rounded-lg">
               <Image
-                src="/placeholder-illustration.jpg"
+                src="/guide.jpeg"
                 alt="AI intelligence illustration"
                 fill
                 className="object-contain"
