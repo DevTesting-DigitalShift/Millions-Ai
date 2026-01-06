@@ -43,13 +43,14 @@ export function FloatingCube() {
     const showTimer = setTimeout(() => setIsVisible(true), 10);
 
     const timer = setInterval(() => {
+      // Start image cube rotation
       setImageRotation((r) => r - 90);
 
-      const textDelay = 1000 + Math.random() * 1000;
+      // Start text cube when image is halfway through (50% of 600ms = 300ms)
       setTimeout(() => {
         setTextRotation((r) => r - 90);
-      }, textDelay);
-    }, 4000);
+      }, 300); // Text starts when image is at 50% rotation
+    }, 3000); // Rotate every 3 seconds
 
     return () => {
       clearTimeout(showTimer);

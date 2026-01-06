@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { useSlideInLeft, useSlideInRight } from "@/hooks/useGsapAnimations";
 
 // Network animation component
 function NetworkAnimation() {
@@ -218,12 +219,15 @@ function NetworkAnimation() {
 }
 
 export function ProductShowcase2() {
+  const leftRef = useSlideInLeft(0.2);
+  const rightRef = useSlideInRight(0.4);
+
   return (
     <section className="py-36">
       <div className="container-section px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Side - Content */}
-          <div className="space-y-8">
+          <div ref={leftRef} className="space-y-8">
             <div>
               <h2 className="text-4xl md:text-5xl font-semibold text-foreground mb-4 leading-tight">
                 MAIGent™{" "}
@@ -322,7 +326,7 @@ export function ProductShowcase2() {
           </div>
 
           {/* Right Side - Network Animation */}
-          <div className="relative">
+          <div ref={rightRef} className="relative">
             <div className="relative bg-black rounded-2xl shadow-2xl overflow-hidden">
               <NetworkAnimation />
             </div>

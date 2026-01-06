@@ -4,9 +4,12 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { useSlideInLeft, useSlideInRight } from "@/hooks/useGsapAnimations";
 
 export function ProductShowcase() {
   const [activeStep, setActiveStep] = useState(0);
+  const leftRef = useSlideInLeft(0.2);
+  const rightRef = useSlideInRight(0.4);
 
   const steps = [
     {
@@ -32,7 +35,7 @@ export function ProductShowcase() {
       <div className="container-section px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Side - Animation */}
-          <div className="relative">
+          <div ref={leftRef} className="relative">
             {/* Product Interface Animation */}
             <div className="relative bg-black rounded-2xl p-8 shadow-2xl min-h-[600px] flex items-center justify-center">
               <div className="w-full max-w-md">
@@ -122,7 +125,7 @@ export function ProductShowcase() {
           </div>
 
           {/* Right Side - Content */}
-          <div className="space-y-8">
+          <div ref={rightRef} className="space-y-8">
             <div>
               <h2 className="text-4xl md:text-5xl font-semibold text-foreground mb-4 leading-tight">
                 MAIGrid™{" "}

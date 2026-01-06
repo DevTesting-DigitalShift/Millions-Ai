@@ -25,7 +25,7 @@ const CompanyLogo = () => {
 
         <Logo name="robin" />
         <Logo name="leenaLogo" />
-        <Logo name="happy-robot" />
+        <Logo name="happy-robot" scale="scale-150" />
         <Logo name="kore-ai" />
 
         <Logo name="athena" scale="scale-125" />
@@ -53,11 +53,14 @@ function Logo({
 }) {
   const showTooltip = name === "sana" || name === "ambience";
 
+  // happy-robot uses .png, all others use .svg
+  const extension = name === "happy-robot" ? "png" : "svg";
+
   return (
     <div className="relative group flex flex-col items-center justify-center gap-2">
       <div className="flex items-center justify-center h-10 w-full">
         <Image
-          src={`/logos/${name}.svg`}
+          src={`/logos/${name}.${extension}`}
           alt={name}
           width={240}
           height={80}

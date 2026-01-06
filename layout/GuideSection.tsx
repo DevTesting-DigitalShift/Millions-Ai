@@ -1,14 +1,20 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { useSlideInLeft, useSlideInRight } from "@/hooks/useGsapAnimations";
 
 export default function GuideSection() {
+  const textRef = useSlideInLeft(0.2);
+  const imageRef = useSlideInRight(0.4);
+
   return (
     <div className="bg-linear-to-br from-background via-muted/20 to-background/60">
       <section className="mx-auto max-w-7xl px-6 py-36">
         <div className="grid grid-cols-1 items-center gap-20 lg:grid-cols-[1.3fr_0.7fr]">
-          <div>
+          <div ref={textRef}>
             <h2 className="text-4xl font-semibold tracking-tight text-foreground md:text-5xl lg:text-6xl leading-[1.1] ">
-              Million AI isn’t just a database – it’s a guide
+              Million AI isn&apos;t just a database – it&apos;s a guide
             </h2>
 
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
@@ -37,7 +43,10 @@ export default function GuideSection() {
             </div>
           </div>
 
-          <div className="relative flex justify-center lg:justify-end">
+          <div
+            ref={imageRef}
+            className="relative flex justify-center lg:justify-end"
+          >
             <div className="relative aspect-square w-160 rounded-lg">
               <Image
                 src="/guide.jpeg"

@@ -580,7 +580,7 @@ export function TrustedInsights() {
   }, [isInView]);
 
   return (
-    <section className="py-36 bg-background overflow-hidden">
+    <section className="pt-36 pb-0 bg-background overflow-hidden">
       <div className="container-section px-6">
         <div className="mb-20 flex flex-col items-center space-y-6 text-center">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground leading-[1.1]">
@@ -700,13 +700,16 @@ export function TrustedInsights() {
             one living decision intelligence.
           </p>
         </div>
-        <video
-          src="/video.mp4"
-          autoPlay
-          muted
-          loop
-          className="w-full rounded-xl"
-        />
+        <div className="w-full mt-40 h overflow-hidden rounded-xl">
+          <video
+            src="/video.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover relative bottom-65"
+          />
+        </div>
       </div>
     </section>
   );
