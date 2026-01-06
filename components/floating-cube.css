@@ -1,8 +1,7 @@
-/* Floating Cube Styles - True 3D Cube */
 .fragment-wrapper {
   visibility: hidden;
   position: absolute;
-  bottom: 1.5rem;
+  top: 22rem;
   right: 2rem;
   z-index: 50;
 }
@@ -106,7 +105,7 @@
 
 .word-wrap-square {
   display: block;
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 700;
   line-height: 1;
   margin-top: 0.5rem;
@@ -125,13 +124,13 @@
 /* Responsive adjustments */
 @media (min-width: 1200px) {
   .cube-scene {
-    width: 220px;
-    height: 220px;
+    width: 150px;
+    height: 150px;
   }
 
   .cube-face {
-    width: 220px;
-    height: 220px;
+    width: 150px;
+    height: 150px;
   }
 
   .cube-face:nth-child(1) {
