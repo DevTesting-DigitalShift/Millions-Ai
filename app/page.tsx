@@ -4,6 +4,7 @@ import Testimonials from "@/layout/Testimonials";
 import GuideSection from "@/layout/GuideSection";
 import { ProductShowcase } from "@/layout/ProductShowcase";
 import { ProductShowcase2 } from "@/layout/ProductShowcase2";
+import { EvolutionScroll } from "@/components/evolution-scroll";
 
 export default function Home() {
   return (
@@ -13,6 +14,10 @@ export default function Home() {
       <GuideSection />
       <ProductShowcase />
       <ProductShowcase2 />
+
+      {/* Evolution scroll animation */}
+      <EvolutionScroll />
+
       <Testimonials title="Practitioners are raving" breakTitle="about us" />
     </main>
   );
