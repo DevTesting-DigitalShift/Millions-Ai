@@ -1,129 +1,205 @@
-"use client";
+import React, { useEffect, useRef, useState } from 'react';
+import { Infinity as InfinityIcon } from 'lucide-react';
 
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { stages } from "./stage-icons";
-
-// Register GSAP plugin
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-/**
- * EvolutionScroll - GSAP-powered smooth scroll evolution
- *
- * Now a proper section component (not fixed/background)
- * Flows naturally with the page content
- */
-export function EvolutionScroll() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const stagesRef = useRef<(HTMLDivElement | null)[]>([]);
+export default function App() {
+  const canvasRef = useRef(null);
+  
+  // Animation configuration for the Light Theme
+  const config = {
+    particleCount: 100,
+    baseSpeed: 0.3, 
+    connectionRadius: 120,
+    colorBase: '45, 55, 72', // Dark charcoal for particles
+    bgHex: '#f9f2e9'
+  };
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    let animationFrameId;
+    let particles = [];
+    let time = 0;
 
-    const ctx = gsap.context(() => {
-      stagesRef.current.forEach((stage, index) => {
-        if (!stage) return;
+    // Handle Resize
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles();
+    };
 
-        /**
-         * Each stage animates within the scroll container
-         * No fixed positioning - just normal flow
-         */
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: `${(index / stages.length) * 100}% center`,
-            end: `${((index + 1) / stages.length) * 100}% center`,
-            scrub: 1,
-            // markers: true, // Uncomment to debug
-          },
-        });
+    // Particle Class
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.baseX = this.x;
+        this.baseY = this.y;
+        this.density = (Math.random() * 30) + 1;
+        this.speedX = (Math.random() - 0.5) * config.baseSpeed;
+        this.speedY = (Math.random() - 0.5) * config.baseSpeed;
+      }
 
-        // Set initial state
-        gsap.set(stage, {
-          x: "100%",
-          opacity: 0,
-        });
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
 
-        // Animate in from right, then out to left
-        tl.fromTo(
-          stage,
-          {
-            x: "100%",
-            opacity: 0,
-          },
-          {
-            x: "0%",
-            opacity: 1,
-            duration: 0.4,
-            ease: "power2.out",
+        // Gentle bounce off edges
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      }
+
+      draw() {
+        ctx.fillStyle = `rgba(${config.colorBase}, 0.6)`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    const initParticles = () => {
+      particles = [];
+      for (let i = 0; i < config.particleCount; i++) {
+        particles.push(new Particle());
+      }
+    };
+
+    const animate = () => {
+      // Use the specific beige color for the trail effect to blend smoothly
+      ctx.fillStyle = 'rgba(249, 242, 233, 0.3)'; 
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      time += 0.005;
+      
+      particles.forEach((particle, i) => {
+        particle.update();
+        particle.draw();
+
+        // Connect particles with subtle dark lines
+        for (let j = i; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < config.connectionRadius) {
+            ctx.beginPath();
+            // Dark elegant lines, fading with distance
+            ctx.strokeStyle = `rgba(${config.colorBase}, ${0.15 * (1 - distance / config.connectionRadius)})`;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
           }
-        ).to(stage, {
-          x: "-100%",
-          opacity: 0,
-          duration: 0.4,
-          ease: "power2.in",
-        });
-
-        // First stage starts visible
-        if (index === 0) {
-          gsap.set(stage, {
-            x: "0%",
-            opacity: 1,
-          });
         }
       });
-    }, containerRef);
 
-    return () => ctx.revert();
+      // Draw the central organic sine-wave loop
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      const radius = 140;
+
+      ctx.beginPath();
+      for (let i = 0; i <= 360; i++) {
+        const angle = (i * Math.PI) / 180;
+        // Smoother, slower wave for the light theme
+        const wave = Math.sin(angle * 6 + time * 2) * 10 + Math.cos(angle * 4 - time) * 10;
+        const dynamicRadius = radius + wave;
+        
+        const x = centerX + Math.cos(angle) * dynamicRadius;
+        const y = centerY + Math.sin(angle) * dynamicRadius;
+        
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      
+      ctx.closePath();
+      // Dark slate/orange accent gradient stroke
+      const gradient = ctx.createLinearGradient(centerX - radius, centerY - radius, centerX + radius, centerY + radius);
+      gradient.addColorStop(0, '#2d3748');
+      gradient.addColorStop(0.5, '#ed8936'); // Soft orange accent
+      gradient.addColorStop(1, '#2d3748');
+      
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   return (
-    <div className="relative py-20">
-      {/* Section header */}
-      <div className="text-center mb-16 px-4">
-        <h2 className="text-5xl font-bold text-neutral-800 mb-4">
-          The Evolution of Intelligence
-        </h2>
-        <p className="text-xl text-neutral-600 max-w-2xl mx-auto">
-          From raw materials to artificial intelligence—witness the journey of
-          human innovation
-        </p>
-      </div>
+    <div style={{ backgroundColor: '#f9f2e9' }} className="relative w-full h-screen overflow-hidden flex items-center justify-center text-slate-800">
+      {/* Background Canvas Layer */}
+      <canvas 
+        ref={canvasRef} 
+        className="absolute top-0 left-0 w-full h-full z-0"
+      />
 
-      {/* Scroll container for stages */}
-      <div ref={containerRef} className="relative h-[400vh] w-full">
-        {/* Sticky viewport that shows one stage at a time */}
-        <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-          {stages.map((stage, index) => (
-            <div
-              key={stage.id}
-              ref={(el) => {
-                stagesRef.current[index] = el;
-              }}
-              className="absolute inset-0 flex items-center justify-center"
-            >
-              <div className="flex flex-col items-center gap-6">
-                {/* Stage icon */}
-                <div className="w-64 h-64 max-w-[80vw]">{stage.icon}</div>
-
-                {/* Stage label */}
-                <div className="text-center">
-                  <h3 className="text-4xl font-bold text-neutral-800 mb-2">
-                    {stage.name}
-                  </h3>
-                  <p className="text-lg text-neutral-500">{stage.subtitle}</p>
-                </div>
-              </div>
+      {/* Foreground SVG Layer */}
+      <div className="z-10 relative flex flex-col items-center justify-center pointer-events-none">
+        
+        {/* Animated SVG Ring - Clean Geometric Style */}
+        <div className="relative animate-spin-slow">
+           <svg 
+            width="320" 
+            height="320" 
+            viewBox="0 0 100 100" 
+            className="opacity-90"
+          >
+            {/* Outer dashed ring */}
+            <circle cx="50" cy="50" r="48" stroke="#2d3748" strokeWidth="0.5" fill="none" strokeDasharray="4 4" className="opacity-40" />
+            
+            {/* Middle solid ring with gradient */}
+            <defs>
+              <linearGradient id="lightGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#2d3748" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#ed8936" stopOpacity="0.8" />
+              </linearGradient>
+            </defs>
+            <circle cx="50" cy="50" r="42" stroke="url(#lightGrad)" strokeWidth="0.8" fill="none" />
+            
+            {/* Inner rotating accents */}
+            <circle cx="50" cy="50" r="30" stroke="#2d3748" strokeWidth="0.2" fill="none" />
+          </svg>
+        </div>
+        
+        {/* Central Element */}
+        <div className="absolute inset-0 flex items-center justify-center">
+            <div className="bg-[#f9f2e9]/50 backdrop-blur-sm p-6 rounded-full border border-slate-300/50 shadow-xl">
+                <InfinityIcon size={40} className="text-slate-700 animate-pulse" strokeWidth={1.5} />
             </div>
-          ))}
+        </div>
+
+        {/* Text Overlay - Modern Serif/Sans Mix */}
+        <div className="absolute top-[82%] text-center">
+           <h1 className="text-slate-800 font-light text-3xl tracking-[0.3em] uppercase">
+             Flow
+           </h1>
+           <div className="h-px w-12 bg-orange-400 mx-auto my-3"></div>
+           <p className="text-slate-500 text-[10px] tracking-widest uppercase font-medium">
+             Seamless Loop
+           </p>
         </div>
       </div>
 
-      {/* Bottom spacing */}
-      <div className="h-20" />
+      <style>{`
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+          animation: spin-slow 30s linear infinite;
+        }
+      `}</style>
     </div>
   );
 }

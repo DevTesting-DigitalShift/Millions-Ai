@@ -4,7 +4,6 @@ import Testimonials from "@/layout/Testimonials";
 import GuideSection from "@/layout/GuideSection";
 import { ProductShowcase } from "@/layout/ProductShowcase";
 import { ProductShowcase2 } from "@/layout/ProductShowcase2";
-import { EvolutionScroll } from "@/components/evolution-scroll";
 import MillionGraphAnimation from "@/app/MillionGraphAnimations";
 import { ScrollBackground } from "@/components/ScrollBackground"; // NEW: Background animation layer
 

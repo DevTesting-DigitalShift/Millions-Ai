@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 const testimonials = [
   {
@@ -17,7 +18,7 @@ const testimonials = [
   {
     company: "Vanta",
     quote:
-      "This should be an essential pillar of every company’s GTM stack. It automates hours of manual research so teams can focus on selling.",
+      "This should be an essential pillar of every company's GTM stack. It automates hours of manual research so teams can focus on selling.",
     name: "Stevie Case",
     role: "CRO",
     avatar: "/avatar.jpg",
@@ -26,7 +27,7 @@ const testimonials = [
   {
     company: "Intercom",
     quote:
-      "The depth of insight unlocked here is something we couldn’t have imagined before.",
+      "The depth of insight unlocked here is something we couldn't have imagined before.",
     name: "Alexander DeMoulin",
     role: "Director of Revenue Operations",
     avatar: "/avatar.jpg",
@@ -51,6 +52,27 @@ const testimonials = [
     color: "bg-pink-500",
   },
 ];
+
+// Animation variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
+    },
+  },
+};
 
 type TitleProps = {
   title: string;
@@ -77,7 +99,13 @@ export default function Testimonials({ title, breakTitle }: TitleProps) {
 
   return (
     <section className="overflow-hidden px-6 py-36">
-      <div className="mx-auto mb-12 flex max-w-7xl items-start justify-between">
+      <motion.div
+        className="mx-auto mb-12 flex max-w-7xl items-start justify-between"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={{fadeInUp}}
+      >
         <h2 className="text-5xl font-semibold text-zinc-900">
           {title}
           <br className="mt-1" />
@@ -100,10 +128,16 @@ export default function Testimonials({ title, breakTitle }: TitleProps) {
             <ChevronRight />
           </button>
         </div>
-      </div>
+      </motion.div>
 
       {/* Horizontal Track */}
-      <div className="relative mx-auto max-w-7xl mt-20">
+      <motion.div
+        className="relative mx-auto max-w-7xl mt-20"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={staggerContainer}
+      >
         <div
           className="flex transition-transform duration-500 ease-out"
           style={{
@@ -111,13 +145,14 @@ export default function Testimonials({ title, breakTitle }: TitleProps) {
           }}
         >
           {testimonials.map((t, i) => (
-            <div
+            <motion.div
               key={i}
-              className={`mr-6 flex h-[350px] w-[580px] shrink-0 flex-col justify-between rounded-sm p-6 cursor-pointer hover:shadow-xl ${t.color}`}
+              className={`mr-6 flex h-[350px] w-[580px] shrink-0 flex-col justify-between rounded-sm p-6 cursor-pointer ${t.color}`}
+              variants={{fadeInUp}}
             >
               <div>
                 <p className="text-xl font-medium leading-relaxed text-primary">
-                  “{t.quote}”
+                  &ldquo;{t.quote}&rdquo;
                 </p>
               </div>
 
@@ -136,10 +171,10 @@ export default function Testimonials({ title, breakTitle }: TitleProps) {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

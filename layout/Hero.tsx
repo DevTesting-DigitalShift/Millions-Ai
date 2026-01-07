@@ -21,7 +21,7 @@ export function Hero() {
           <div className="bg-[#FAEFE0] border-[#F3D7B2] border w-full h-140 py-24 rounded-3xl">
             <h1
               ref={headingRef}
-              className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight mb-6"
+              className="text-5xl md:text-6xl lg:text-7xl max-w-7xl mx-auto font-semibold tracking-tight mb-6"
             >
               Adopt AI that Aligns with your business Process. Priorities.
               Context

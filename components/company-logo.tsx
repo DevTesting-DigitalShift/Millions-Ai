@@ -7,7 +7,7 @@ const CompanyLogo = () => {
         Evaluated 5,000+ leading AI Agents across business functions
       </p>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-[repeat(12,minmax(2rem,7rem))] gap-x-8 gap-y-6 items-center justify-items-center max-w-7xl mx-auto">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-[repeat(12,minmax(2rem,7rem))] gap-x-8 gap-y-6 items-center justify-items-center max-w-7xl mx-auto mt-10">
         <Logo name="harvey" />
         <Logo name="legora" />
         <Logo name="clay" />

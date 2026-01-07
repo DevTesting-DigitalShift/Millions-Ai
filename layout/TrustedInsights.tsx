@@ -603,7 +603,7 @@ export function TrustedInsights() {
         </div>
 
         <div ref={containerRef} className="w-full">
-          <div className="bg-[#0A0A0A] rounded-2xl p-4 shadow-2xl overflow-hidden w-full h-[600px] flex gap-2">
+          <div className="bg-[#f0e4d2] rounded-2xl p-4 shadow-xl overflow-hidden w-full h-[600px] flex gap-2">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.id}
@@ -617,9 +617,9 @@ export function TrustedInsights() {
                 }}
                 className={cn(
                   "relative rounded-xl overflow-hidden cursor-pointer",
-                  "bg-gradient-to-br from-gray-900 to-gray-950",
-                  "border border-gray-800/50",
-                  activeFeature === index && "border-gray-700"
+                  "bg-linear-to-br from-[#f9f2e9] to-[#f5ede0]",
+                  "border-2 border-[#e5d5c0]/90",
+                  activeFeature === index && "border-[#d4c4a8]"
                 )}
               >
                 <div
@@ -629,10 +629,10 @@ export function TrustedInsights() {
                     activeFeature === index ? "opacity-0" : "opacity-100"
                   )}
                 >
-                  <h3 className="text-white font-semibold text-2xl writing-mode-vertical transform absolute top-10 left-6">
+                  <h3 className="text-[#1c1c1c] font-semibold text-2xl writing-mode-vertical transform absolute top-10 left-6">
                     {feature.title}
                   </h3>
-                  <div className="absolute bottom-6 left-6 text-8xl font-semibold text-white/90">
+                  <div className="absolute bottom-6 left-6 text-8xl font-semibold text-[#1c1c1c]/20">
                     {index + 1}
                   </div>
                 </div>
@@ -650,13 +650,13 @@ export function TrustedInsights() {
                 >
                   <div className="space-y-6">
                     <div className="space-y-4">
-                      <h3 className="text-3xl font-bold text-white">
+                      <h3 className="text-3xl font-bold text-[#1c1c1c]">
                         {feature.title}
                       </h3>
-                      <p className="text-gray-400 text-base leading-relaxed">
+                      <p className="text-[#6b6b6b] text-base leading-relaxed">
                         {feature.content}
                       </p>
-                      <div className="flex items-center text-sm text-gray-400 cursor-pointer hover:text-white transition-colors group pt-2">
+                      <div className="flex items-center text-sm text-[#6b6b6b] cursor-pointer hover:text-[#1c1c1c] transition-colors group pt-2">
                         Learn more
                         <span className="ml-2 group-hover:translate-x-1 transition-transform">
                           →
@@ -664,7 +664,7 @@ export function TrustedInsights() {
                       </div>
                     </div>
 
-                    <div className="mt relative h-full w-full border border-gray-800 bg-gray-900/30 rounded-lg flex items-center justify-center overflow-hidden">
+                    <div className="mt relative h-full w-full border border-[#e5d5c0] bg-white/40 rounded-lg flex items-center justify-center overflow-hidden">
                       {index === 0 && activeFeature === 0 && (
                         <AlignAnimation key="align-anim" />
                       )}
@@ -677,7 +677,7 @@ export function TrustedInsights() {
                     </div>
                   </div>
 
-                  <div className="text-8xl font-black text-white/5 self-end">
+                  <div className="text-8xl font-black text-[#1c1c1c]/5 self-end">
                     {index + 1}
                   </div>
                 </motion.div>
