@@ -5,6 +5,7 @@ import GuideSection from "@/layout/GuideSection";
 import { ProductShowcase } from "@/layout/ProductShowcase";
 import { ProductShowcase2 } from "@/layout/ProductShowcase2";
 import { EvolutionScroll } from "@/components/evolution-scroll";
+import MillionGraphAnimation from "@/app/MillionGraphAnimations";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <ProductShowcase />
       <ProductShowcase2 />
 
+      <MillionGraphAnimation />
       {/* Evolution scroll animation */}
       <EvolutionScroll />
 

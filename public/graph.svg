@@ -1,0 +1,69 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- BACKGROUND GRID (Optional tech feel) -->
+  <rect width="1200" height="675" fill="#FAFAFA"/>
+  <path d="M100 0V675 M200 0V675 M300 0V675 M400 0V675 M500 0V675 M600 0V675 M700 0V675 M800 0V675 M900 0V675 M1000 0V675 M1100 0V675" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="4 4"/>
+  <path d="M0 100H1200 M0 200H1200 M0 300H1200 M0 400H1200 M0 500H1200 M0 600H1200" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- LEFT: DATA SOURCES (Aligns with M100 coordinates) -->
+  <!-- Source 1 -->
+  <g transform="translate(60, 230)">
+    <rect width="80" height="40" rx="8" fill="white" stroke="#CBD5E1" stroke-width="2"/>
+    <text x="40" y="25" font-family="sans-serif" font-size="12" fill="#64748B" text-anchor="middle">Keywords</text>
+  </g>
+  <!-- Source 2 -->
+  <g transform="translate(60, 310)">
+    <rect width="80" height="40" rx="8" fill="white" stroke="#CBD5E1" stroke-width="2"/>
+    <text x="40" y="25" font-family="sans-serif" font-size="12" fill="#64748B" text-anchor="middle">Intent</text>
+  </g>
+  <!-- Source 3 -->
+  <g transform="translate(60, 390)">
+    <rect width="80" height="40" rx="8" fill="white" stroke="#CBD5E1" stroke-width="2"/>
+    <text x="40" y="25" font-family="sans-serif" font-size="12" fill="#64748B" text-anchor="middle">Data</text>
+  </g>
+
+  <!-- CENTER: THE FUNNEL / INTAKE -->
+  <path d="M250 250 L250 410" stroke="#94A3B8" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="250" cy="330" r="15" fill="#3B82F6" fill-opacity="0.2" stroke="#3B82F6" stroke-width="2"/>
+
+  <!-- MIDDLE: PROCESSING CORE (Aligns with M350 start) -->
+  <g transform="translate(300, 280)">
+    <rect width="100" height="100" rx="20" fill="white" stroke="#3B82F6" stroke-width="2"/>
+    <!-- Placeholder for specific logo/icon -->
+    <text x="50" y="55" font-family="sans-serif" font-size="14" font-weight="bold" fill="#0F172A" text-anchor="middle">AI CORE</text>
+  </g>
+
+  <!-- RIGHT: LAYERS (Aligns with M650 target) -->
+  <!-- Layer 1 -->
+  <g transform="translate(600, 150)">
+    <rect width="150" height="100" rx="12" fill="white" stroke="#E2E8F0" stroke-width="2" fill-opacity="0.9"/>
+    <rect x="0" y="0" width="150" height="100" rx="12" fill="url(#glass-gradient)"/>
+    <text x="75" y="40" font-family="sans-serif" font-size="14" font-weight="bold" fill="#334155" text-anchor="middle">NLP Model</text>
+    <text x="75" y="65" font-family="sans-serif" font-size="12" fill="#64748B" text-anchor="middle">Processing...</text>
+  </g>
+
+  <!-- Layer 2 -->
+  <g transform="translate(600, 400)">
+    <rect width="150" height="100" rx="12" fill="white" stroke="#E2E8F0" stroke-width="2" fill-opacity="0.9"/>
+    <rect x="0" y="0" width="150" height="100" rx="12" fill="url(#glass-gradient)"/>
+    <text x="75" y="40" font-family="sans-serif" font-size="14" font-weight="bold" fill="#334155" text-anchor="middle">SEO Rules</text>
+    <text x="75" y="65" font-family="sans-serif" font-size="12" fill="#64748B" text-anchor="middle">Optimizing...</text>
+  </g>
+
+  <!-- FAR RIGHT: OUTPUT (Aligns with M1050 target) -->
+  <g transform="translate(1000, 280)">
+    <circle cx="50" cy="50" r="60" fill="url(#blue-gradient)"/>
+    <text x="50" y="55" font-family="sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">RANK #1</text>
+  </g>
+
+  <!-- DEFINITIONS -->
+  <defs>
+    <linearGradient id="glass-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#F1F5F9" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="blue-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+</svg>
