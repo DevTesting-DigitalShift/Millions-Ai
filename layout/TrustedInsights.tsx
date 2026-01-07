@@ -580,7 +580,7 @@ export function TrustedInsights() {
   }, [isInView]);
 
   return (
-    <section className="pt-36 pb-0 bg-background overflow-hidden">
+    <section className="pt-36 pb-0 overflow-hidden">
       <div className="container-section px-6">
         <div className="mb-20 flex flex-col items-center space-y-6 text-center">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground leading-[1.1]">

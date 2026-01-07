@@ -6,21 +6,26 @@ import { ProductShowcase } from "@/layout/ProductShowcase";
 import { ProductShowcase2 } from "@/layout/ProductShowcase2";
 import { EvolutionScroll } from "@/components/evolution-scroll";
 import MillionGraphAnimation from "@/app/MillionGraphAnimations";
+import { ScrollBackground } from "@/components/ScrollBackground"; // NEW: Background animation layer
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      <Hero />
-      <TrustedInsights />
-      <GuideSection />
-      <ProductShowcase />
-      <ProductShowcase2 />
+    <main className="min-h-screen relative">
+      {/* NEW: Scroll-driven background animation layer - sits behind all content */}
+      <ScrollBackground />
 
-      <MillionGraphAnimation />
-      {/* Evolution scroll animation */}
-      <EvolutionScroll />
+      {/* EXISTING CONTENT - All sections remain exactly the same */}
+      <div className="relative z-10">
+        <Hero />
+        <TrustedInsights />
+        <GuideSection />
+        <ProductShowcase />
+        <ProductShowcase2 />
 
-      <Testimonials title="Practitioners are raving" breakTitle="about us" />
+        <MillionGraphAnimation />
+
+        <Testimonials title="Practitioners are raving" breakTitle="about us" />
+      </div>
     </main>
   );
 }
