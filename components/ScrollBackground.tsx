@@ -92,7 +92,6 @@ const BACKGROUND_IMAGES = [
 
 export function ScrollBackground() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [nextIndex, setNextIndex] = useState(1);
   const [fadeProgress, setFadeProgress] = useState(0);
   const [isInHeroOrFooter, setIsInHeroOrFooter] = useState(true);
 
@@ -132,11 +131,9 @@ export function ScrollBackground() {
       const totalImages = BACKGROUND_IMAGES.length;
       const imageProgress = scrollProgress * totalImages;
       const currentIdx = Math.floor(imageProgress);
-      const nextIdx = Math.min(currentIdx + 1, totalImages - 1);
       const fade = imageProgress - currentIdx; // 0 to 1 within current image
 
       setCurrentIndex(currentIdx);
-      setNextIndex(nextIdx);
       setFadeProgress(fade);
     };
 
@@ -150,20 +147,51 @@ export function ScrollBackground() {
     };
   }, []);
 
+  // V1: Keep existing scroll calculation (unchanged)
   const currentImage = BACKGROUND_IMAGES[currentIndex];
-  const nextImage = BACKGROUND_IMAGES[nextIndex];
 
   // Don't render anything in Hero or Footer sections
   if (isInHeroOrFooter || !currentImage) return null;
 
-  // Show only ONE image at a time - no overlapping
-  // If fade progress > 0.5, show next image, otherwise show current
-  const shouldShowNext =
-    fadeProgress > 0.5 && nextImage && currentIndex !== nextIndex;
-  const imageToShow = shouldShowNext ? nextImage : currentImage;
-  const imageOpacity = shouldShowNext
-    ? (fadeProgress - 0.5) * 2 // Fade in from 0.5 to 1
-    : 1 - fadeProgress * 2; // Fade out from 0 to 0.5
+  // ========== V2: PERSISTENCE LAYER ==========
+  // Calculate continuous scroll position (0 to 8 for 8 images)
+  const continuousProgress = currentIndex + fadeProgress;
+
+  // Helper function to calculate stage properties based on distance from current
+  const getStageProperties = (stageIndex: number) => {
+    const distance = stageIndex - continuousProgress;
+
+    // Position calculation (left = past, center = present, right = future)
+    // Increased spacing to prevent overlap
+    let translateX;
+    if (distance < -0.5) {
+      // Past stages: far left with parallax lag (no overlap)
+      translateX = distance * 80 + fadeProgress * 8; // Much more spacing
+    } else if (distance > 0.5) {
+      // Future stages: far right (no overlap)
+      translateX = distance * 80;
+    } else {
+      // Current stage: centered, direct tracking
+      translateX = distance * 60;
+    }
+
+    // Opacity calculation
+    let opacity;
+    const absDistance = Math.abs(distance);
+
+    if (absDistance < 0.5) {
+      // Current stage: full opacity
+      opacity = 0.6;
+    } else if (distance < 0) {
+      // Past stages: 15-25% opacity, fade based on distance
+      opacity = Math.max(0.15, 0.25 - absDistance * 0.05);
+    } else {
+      // Future stages: very low opacity hint
+      opacity = Math.max(0, 0.2 - absDistance * 0.1);
+    }
+
+    return { translateX, opacity };
+  };
 
   return (
     <div
@@ -173,15 +201,26 @@ export function ScrollBackground() {
         pointerEvents: "none",
       }}
     >
-      {/* Single Image - only one visible at a time */}
-      <div
-        className="absolute inset-0 transition-all duration-500 ease-out"
-        style={{
-          opacity: Math.max(0.3, imageOpacity), // Minimum opacity to keep it visible
-        }}
-      >
-        <BackgroundImage image={imageToShow} />
-      </div>
+      {/* V2: Render ALL stages with persistence */}
+      {BACKGROUND_IMAGES.map((image, index) => {
+        const { translateX, opacity } = getStageProperties(index);
+
+        // Only render stages that are somewhat visible
+        if (opacity < 0.1) return null;
+
+        return (
+          <div
+            key={`stage-${image.id}-${index}`}
+            className="absolute inset-0 transition-all duration-700 ease-out"
+            style={{
+              opacity,
+              transform: `translateX(${translateX}%)`,
+            }}
+          >
+            <BackgroundImage image={image} />
+          </div>
+        );
+      })}
     </div>
   );
 }
