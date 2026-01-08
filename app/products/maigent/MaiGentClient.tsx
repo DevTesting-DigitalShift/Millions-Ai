@@ -3,7 +3,7 @@
 import CompanyLogo from "@/components/company-logo";
 import { Button } from "@/components/ui/button";
 import Testimonials from "@/layout/Testimonials";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
 const marketSignalsCards = [
   {
@@ -48,29 +48,57 @@ const marketSignalsCards = [
 ];
 
 // Animation variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
+const fadeInUp: Variants = {
+  hidden: { opacity: 0, y: 50 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.7 },
   },
 };
 
-const fadeIn = {
-  hidden: { opacity: 0 },
+const fadeInDown: Variants = {
+  hidden: { opacity: 0, y: -50 },
   visible: {
     opacity: 1,
-    transition: { duration: 0.8, ease: "easeOut" },
+    y: 0,
+    transition: { duration: 0.7 },
   },
 };
 
-const staggerContainer = {
+const fadeInLeft: Variants = {
+  hidden: { opacity: 0, x: -60 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8 },
+  },
+};
+
+const fadeInRight: Variants = {
+  hidden: { opacity: 0, x: 60 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8 },
+  },
+};
+
+const scaleIn: Variants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.7 },
+  },
+};
+
+const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.15,
       delayChildren: 0.1,
     },
   },
@@ -101,25 +129,26 @@ const MaiGentClient = () => {
         <motion.div
           className="relative z-10 text-center px-6 py-20 mx-auto mt-16"
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
           variants={staggerContainer}
         >
           <motion.h1
             className="text-5xl md:text-6xl font-semibold text-foreground mb-6 leading-tight"
-            variants={{ fadeInUp }}
+            variants={fadeInDown}
           >
             We work harder, so you dont have to
           </motion.h1>
 
           <motion.p
             className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto mb-8"
-            variants={{ fadeInUp }}
+            variants={fadeInUp}
           >
             Enterprise-ready agents, mapped to your workflows, scored on fit,
             readiness, and risk —shortlist in minutes, not months.
           </motion.p>
 
-          <motion.div variants={{ fadeInUp }}>
+          <motion.div variants={scaleIn}>
             <Button
               size="lg"
               className="bg-foreground text-background hover:bg-foreground/90 rounded-lg px-8 py-6 text-base font-semibold"
@@ -143,12 +172,12 @@ const MaiGentClient = () => {
             variants={staggerContainer}
           >
             <motion.span
-              className="text-foreground text-lg font-semibold bg-muted-foreground/10 px-4 py-2 rounded-lg"
-              variants={{ fadeInUp }}
+              className="text-foreground text-lg font-semibold bg-muted-foreground/10 px-4 py-2 rounded-lg inline-block"
+              variants={fadeInLeft}
             >
               Score
             </motion.span>
-            <motion.div className="mt-6" variants={{ fadeInUp }}>
+            <motion.div className="mt-6" variants={fadeInUp}>
               <h2 className="text-4xl md:text-5xl font-semibold text-foreground mb-4 leading-tight">
                 Evidence, not opinion
               </h2>
@@ -159,7 +188,7 @@ const MaiGentClient = () => {
               </p>
             </motion.div>
 
-            <motion.div variants={{ fadeInUp }}>
+            <motion.div variants={scaleIn}>
               <Button
                 size="lg"
                 className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-8 py-6 text-base font-semibold"
@@ -174,7 +203,7 @@ const MaiGentClient = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            variants={{ fadeIn }}
+            variants={fadeInRight}
           >
             <div className="relative bg-black rounded-lg shadow-2xl overflow-hidden h-120">
               <img
@@ -195,7 +224,7 @@ const MaiGentClient = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            variants={{ fadeIn }}
+            variants={fadeInLeft}
           >
             <div className="relative bg-black rounded-lg shadow-2xl overflow-hidden h-120">
               <img
@@ -214,12 +243,12 @@ const MaiGentClient = () => {
             variants={staggerContainer}
           >
             <motion.span
-              className="text-foreground text-lg font-semibold bg-muted-foreground/10 px-4 py-2 rounded-lg"
-              variants={{ fadeInUp }}
+              className="text-foreground text-lg font-semibold bg-muted-foreground/10 px-4 py-2 rounded-lg inline-block"
+              variants={fadeInRight}
             >
               Profiles
             </motion.span>
-            <motion.div className="mt-6" variants={{ fadeInUp }}>
+            <motion.div className="mt-6" variants={fadeInUp}>
               <h2 className="text-4xl md:text-5xl font-semibold text-foreground mb-4 leading-tight">
                 Whats behind the Logo
               </h2>
@@ -231,7 +260,7 @@ const MaiGentClient = () => {
               </p>
             </motion.div>
 
-            <motion.div variants={{ fadeInUp }}>
+            <motion.div variants={scaleIn}>
               <Button
                 size="lg"
                 className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-8 py-6 text-base font-semibold"
@@ -254,12 +283,12 @@ const MaiGentClient = () => {
             variants={staggerContainer}
           >
             <motion.span
-              className="text-foreground text-lg font-semibold bg-muted-foreground/10 px-4 py-2 rounded-lg"
-              variants={{ fadeInUp }}
+              className="text-foreground text-lg font-semibold bg-muted-foreground/10 px-4 py-2 rounded-lg inline-block"
+              variants={fadeInLeft}
             >
               Align
             </motion.span>
-            <motion.div className="mt-6" variants={{ fadeInUp }}>
+            <motion.div className="mt-6" variants={fadeInUp}>
               <h2 className="text-4xl md:text-5xl font-semibold text-foreground mb-4 leading-tight">
                 Align Vendors to Process <br />
                 and Usecases
@@ -271,7 +300,7 @@ const MaiGentClient = () => {
               </p>
             </motion.div>
 
-            <motion.div className="space-y-6" variants={{ fadeInUp }}>
+            <motion.div className="space-y-6" variants={fadeInUp}>
               <Button
                 size="lg"
                 className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-8 py-6 text-base font-semibold"
@@ -292,7 +321,7 @@ const MaiGentClient = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            variants={{ fadeIn }}
+            variants={fadeInRight}
           >
             <div className="relative bg-black rounded-lg shadow-2xl overflow-hidden h-120">
               <img
@@ -312,7 +341,7 @@ const MaiGentClient = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          variants={{ fadeInUp }}
+          variants={fadeInUp}
         >
           <h2 className="text-5xl md:text-6xl font-semibold text-foreground mb-6">
             MAIGent, so the shortlist isint just top rated, -its truely aligned
@@ -336,7 +365,7 @@ const MaiGentClient = () => {
             <motion.div
               key={index}
               className={`${card.bgGradient} rounded-4xl p-8 py-10 ${card.textColor} flex flex-col`}
-              variants={{ fadeInUp }}
+              variants={scaleIn}
             >
               <div className="mb-6">
                 <img

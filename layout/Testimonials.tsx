@@ -104,7 +104,7 @@ export default function Testimonials({ title, breakTitle }: TitleProps) {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
-        variants={{fadeInUp}}
+        variants={{ fadeInUp }}
       >
         <h2 className="text-5xl font-semibold text-zinc-900">
           {title}
@@ -148,7 +148,7 @@ export default function Testimonials({ title, breakTitle }: TitleProps) {
             <motion.div
               key={i}
               className={`mr-6 flex h-[350px] w-[580px] shrink-0 flex-col justify-between rounded-sm p-6 cursor-pointer ${t.color}`}
-              variants={{fadeInUp}}
+              variants={{ fadeInUp }}
             >
               <div>
                 <p className="text-xl font-medium leading-relaxed text-primary">
