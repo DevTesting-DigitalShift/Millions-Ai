@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import { Header } from "@/components/header";
-import Footer from "@/components/footer";
+import LayoutWrapper from "@/components/LayoutWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -64,9 +63,7 @@ export default function RootLayout({
         className={`${roobert.variable} ${graphik.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
         style={{ fontFamily: "var(--font-roobert)" }}
       >
-        <Header />
-        {children}
-        <Footer />
+        <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
   );

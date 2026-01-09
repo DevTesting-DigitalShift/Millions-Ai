@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion, useInView, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -580,7 +581,10 @@ export function TrustedInsights() {
   }, [isInView]);
 
   return (
-    <section className="pt-36 pb-0 overflow-hidden">
+    <section
+      className="pt-36 pb-0 overflow-hidden"
+      data-section="trusted-insights"
+    >
       <div className="container-section px-6">
         <div className="mb-20 flex flex-col items-center space-y-6 text-center">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground leading-[1.1]">
@@ -593,12 +597,14 @@ export function TrustedInsights() {
           </p>
 
           <div className="pt-4">
-            <Button
-              size="lg"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 hover:opacity-90 rounded-lg px-8 py-6 text-lg font-medium shadow-lg hover:shadow-xl transition-all border-0"
-            >
-              Meet your AI →
-            </Button>
+            <Link href="/dashboard">
+              <Button
+                size="lg"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 hover:opacity-90 rounded-lg px-8 py-6 text-lg font-medium shadow-lg hover:shadow-xl transition-all border-0"
+              >
+                Meet your AI →
+              </Button>
+            </Link>
           </div>
         </div>
 

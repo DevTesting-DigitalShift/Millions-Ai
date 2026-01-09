@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { FloatingCube } from "@/components/floating-cube";
 import CompanyLogo from "@/components/company-logo";
@@ -15,7 +16,7 @@ export function Hero() {
   const buttonRef = useScaleIn(0.6);
 
   return (
-    <section className="relative flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative flex items-center justify-center overflow-hidden pt-25">
       <div className="w-full px-6 relative z-10">
         <div className="text-center">
           <div className="bg-[#FAEFE0] border-[#F3D7B2] border w-full h-140 py-24 rounded-3xl">
@@ -38,12 +39,14 @@ export function Hero() {
             </p>
 
             <div ref={buttonRef}>
-              <Button
-                size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-8 py-6 text-base font-medium shadow-lg hover:shadow-xl transition-all"
-              >
-                Meet your AI →
-              </Button>
+              <Link href="/dashboard">
+                <Button
+                  size="lg"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-8 py-6 text-base font-medium shadow-lg hover:shadow-xl transition-all"
+                >
+                  Meet your AI →
+                </Button>
+              </Link>
             </div>
           </div>
           <CompanyLogo />

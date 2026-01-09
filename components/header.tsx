@@ -12,6 +12,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
+import { AnimatedLogo } from "./animated-logo";
 
 // Navigation data structure
 const navigationData = [
@@ -69,13 +70,11 @@ const navigationData = [
 export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm bg-background/50">
-      <div className="w-full mx-auto px-16 py-4">
+      <div className="w-full mx-auto px-16 py-6">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <div className="flex items-center gap-1">
-              <span className="text-xl font-bold tracking-tight text-foreground">
-                MRI
-              </span>
+              <AnimatedLogo />
             </div>
           </Link>
 
