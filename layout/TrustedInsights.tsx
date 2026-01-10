@@ -597,14 +597,12 @@ export function TrustedInsights() {
           </p>
 
           <div className="pt-4">
-            <Link href="/dashboard">
-              <Button
-                size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 hover:opacity-90 rounded-lg px-8 py-6 text-lg font-medium shadow-lg hover:shadow-xl transition-all border-0"
-              >
-                Meet your AI →
-              </Button>
-            </Link>
+            <Button
+              size="lg"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 hover:opacity-90 rounded-lg px-8 py-6 text-lg font-medium shadow-lg hover:shadow-xl transition-all border-0"
+            >
+              Meet your AI →
+            </Button>
           </div>
         </div>
 

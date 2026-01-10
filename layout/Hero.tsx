@@ -39,14 +39,12 @@ export function Hero() {
             </p>
 
             <div ref={buttonRef}>
-              <Link href="/dashboard">
-                <Button
-                  size="lg"
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-8 py-6 text-base font-medium shadow-lg hover:shadow-xl transition-all"
-                >
-                  Meet your AI →
-                </Button>
-              </Link>
+              <Button
+                size="lg"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-8 py-6 text-base font-medium shadow-lg hover:shadow-xl transition-all"
+              >
+                Meet your AI →
+              </Button>
             </div>
           </div>
           <CompanyLogo />

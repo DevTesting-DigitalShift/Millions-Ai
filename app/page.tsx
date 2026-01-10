@@ -4,12 +4,11 @@ import Testimonials from "@/layout/Testimonials";
 import GuideSection from "@/layout/GuideSection";
 import { ProductShowcase } from "@/layout/ProductShowcase";
 import { ProductShowcase2 } from "@/layout/ProductShowcase2";
-import ScrollingCube from "@/components/ScrollingCube";
 
 export default function Home() {
   return (
     <main className="min-h-screen relative">
-      <ScrollingCube />
+      {/* <ScrollingCube /> */}
       <Hero />
       <TrustedInsights />
       <GuideSection />
