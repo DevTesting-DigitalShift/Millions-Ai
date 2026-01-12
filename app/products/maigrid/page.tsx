@@ -1,7 +1,11 @@
 import MaiGridClient from "./MaiGridClient";
 
 const MaiGrid = () => {
-  return <MaiGridClient />;
+  return (
+    <div className="bg-accent-foreground">
+      <MaiGridClient />
+    </div>
+  );
 };
 
 export default MaiGrid;

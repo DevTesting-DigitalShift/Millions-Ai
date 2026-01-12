@@ -98,7 +98,7 @@ export default function Testimonials({ title, breakTitle }: TitleProps) {
   };
 
   return (
-    <section className="overflow-hidden px-6 py-36">
+    <section className="overflow-hidden px-6 py-36 rounded-[3rem] rounded-t bg-[#f6ebdc]">
       <motion.div
         className="mx-auto mb-12 flex max-w-7xl items-start justify-between"
         initial="hidden"

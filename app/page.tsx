@@ -7,7 +7,7 @@ import { ProductShowcase2 } from "@/layout/ProductShowcase2";
 
 export default function Home() {
   return (
-    <main className="min-h-screen relative">
+    <main className="min-h-screen relative bg-accent-foreground">
       {/* <ScrollingCube /> */}
       <Hero />
       <TrustedInsights />

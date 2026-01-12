@@ -3,6 +3,8 @@
 import { usePathname } from "next/navigation";
 import { Header } from "@/components/header";
 import Footer from "@/components/footer";
+import SmoothScrollProvider from "@/components/SmoothScrollProvider";
+import CurtainWrapper from "@/components/CurtainWrapper";
 
 export default function LayoutWrapper({
   children,
@@ -12,11 +14,28 @@ export default function LayoutWrapper({
   const pathname = usePathname();
   const isDashboard = pathname?.startsWith("/dashboard");
 
+  if (isDashboard) {
+    return <>{children}</>;
+  }
+
   return (
-    <>
-      {!isDashboard && <Header />}
-      {children}
-      {!isDashboard && <Footer />}
-    </>
+    <SmoothScrollProvider>
+      <div className="relative">
+        {/* Fixed Footer at the bottom */}
+        <div className="fixed bottom-0 left-0 right-0 z-0">
+          <Footer />
+        </div>
+
+        {/* Curtain content that lifts up */}
+        <CurtainWrapper>
+          <div className="min-h-screen">
+            <Header />
+            {children}
+            {/* Spacer to create scroll space for the curtain effect */}
+            <div className="h-screen" />
+          </div>
+        </CurtainWrapper>
+      </div>
+    </SmoothScrollProvider>
   );
 }
