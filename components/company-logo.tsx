@@ -1,50 +1,44 @@
 import Image from "next/image";
-import ScrollingCubes from "./scrolling-cubes";
 
 const CompanyLogo = () => {
   return (
-    <>
-      <section className="mt-20 text-center">
-        <p className="text-sm text-muted-foreground uppercase tracking-wider mb-6 font-bold">
-          Evaluated 5,000+ leading AI Agents across business functions
-        </p>
+    <section className="relative py-20 text-center">
+      <p className="text-sm text-muted-foreground uppercase tracking-wider mb-6 font-bold">
+        Evaluated 5,000+ leading AI Agents across business functions
+      </p>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-[repeat(12,minmax(2rem,7rem))] gap-x-8 gap-y-6 items-center justify-items-center max-w-7xl mx-auto mt-10">
-          <Logo name="harvey" />
-          <Logo name="legora" />
-          <Logo name="clay" />
-          <Logo name="writer" />
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-[repeat(12,minmax(2rem,7rem))] gap-x-8 gap-y-6 items-center justify-items-center max-w-7xl mx-auto mt-10">
+        <Logo name="harvey" />
+        <Logo name="legora" />
+        <Logo name="clay" />
+        <Logo name="writer" />
 
-          <Logo name="sana" />
-          <Logo name="regie-ai" />
-          <Logo name="glean" />
-          <Logo name="rillet" />
+        <Logo name="sana" />
+        <Logo name="regie-ai" />
+        <Logo name="glean" />
+        <Logo name="rillet" />
 
-          <Logo name="observe-ai" scale="scale-125" />
-          <Logo name="moveworks" />
-          <Logo name="cresta" />
-          <Logo name="procure-ai" scale="scale-135 mb-6" />
+        <Logo name="observe-ai" scale="scale-125" />
+        <Logo name="moveworks" />
+        <Logo name="cresta" />
+        <Logo name="procure-ai" scale="scale-135 mb-6" />
 
-          <Logo name="robin" />
-          <Logo name="leenaLogo" />
-          <Logo name="happy-robot" scale="scale-150" />
-          <Logo name="kore-ai" />
+        <Logo name="robin" />
+        <Logo name="leenaLogo" />
+        <Logo name="happy-robot" scale="scale-150" />
+        <Logo name="kore-ai" />
 
-          <Logo name="athena" scale="scale-125" />
-          <Logo name="lakhera" isBlack scale="scale-125" />
-          <Logo name="copy-ai" />
-          <Logo name="people-ai" scale="scale-225" />
+        <Logo name="athena" scale="scale-125" />
+        <Logo name="lakhera" isBlack scale="scale-125" />
+        <Logo name="copy-ai" />
+        <Logo name="people-ai" scale="scale-225" />
 
-          <Logo name="ambience" />
-          <Logo name="orby" />
-          <Logo name="ada" />
-          <Logo name="lexisNexis" />
-        </div>
-      </section>
-
-      {/* Animated Scrolling Cubes */}
-      {/* <ScrollingCubes /> */}
-    </>
+        <Logo name="ambience" />
+        <Logo name="orby" />
+        <Logo name="ada" />
+        <Logo name="lexisNexis" />
+      </div>
+    </section>
   );
 };
 
@@ -63,7 +57,7 @@ function Logo({
   const extension = name === "happy-robot" ? "png" : "svg";
 
   return (
-    <div className="relative group flex flex-col items-center justify-center gap-2">
+    <div className="logo-item relative group flex flex-col items-center justify-center gap-2">
       <div className="flex items-center justify-center h-10 w-full">
         <Image
           src={`/logos/${name}.${extension}`}
