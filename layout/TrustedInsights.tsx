@@ -582,7 +582,7 @@ export function TrustedInsights() {
 
   return (
     <section
-      className="pt-36 pb-0 overflow-hidden"
+      className="pt-10 pb-0 overflow-hidden"
       data-section="trusted-insights"
     >
       <div className="container-section px-6">

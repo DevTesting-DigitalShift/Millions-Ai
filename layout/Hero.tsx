@@ -16,7 +16,7 @@ export function Hero() {
   const buttonRef = useScaleIn(0.6);
 
   return (
-    <section className="relative flex items-center justify-center overflow-hidden pt-25">
+    <section className="relative flex items-center justify-center overflow-hidden pt-5">
       <div className="w-full px-6 relative z-10">
         <div className="text-center">
           <div className="bg-[#FAEFE0] border-[#F3D7B2] border w-full h-140 py-24 rounded-3xl">
