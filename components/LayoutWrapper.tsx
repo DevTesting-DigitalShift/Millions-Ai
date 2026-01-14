@@ -5,6 +5,7 @@ import { Header } from "@/components/header";
 import Footer from "@/components/footer";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import CurtainWrapper from "@/components/CurtainWrapper";
+import MorphingShape from "@/components/MorphingShape";
 
 export default function LayoutWrapper({
   children,
@@ -21,6 +22,9 @@ export default function LayoutWrapper({
   return (
     <SmoothScrollProvider>
       <div className="relative">
+        {/* Morphing shape overlay - must be outside CurtainWrapper for fixed positioning to work */}
+        <MorphingShape />
+
         {/* Fixed Footer at the bottom */}
         <div className="fixed bottom-0 left-0 right-0 z-0">
           <Footer />
