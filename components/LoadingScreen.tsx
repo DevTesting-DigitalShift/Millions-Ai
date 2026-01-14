@@ -1,18 +1,9 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-import { motion, type Transition } from "framer-motion";
+import { useState, useEffect, useMemo, useRef } from "react";
+import { gsap } from "gsap";
 
-type Phase =
-  | "forming"
-  | "stable"
-  | "cracking"
-  | "falling"
-  | "shattering"
-  | "vanishing"
-  | "reset";
-
-type EasingArray = [number, number, number, number];
+type Phase = "forming" | "stable" | "breaking" | "vanishing" | "reset";
 
 interface Cube {
   id: string;
@@ -22,6 +13,7 @@ interface Cube {
   delay: number;
   row: number;
   col: number;
+  element?: HTMLDivElement;
 }
 
 // Define MRI letters using a grid pattern
@@ -53,8 +45,16 @@ const CUBE_SIZE = 12;
 const GAP = 2;
 const LETTER_GAP = 20;
 
+// Seeded random for consistent values
+function seededRandom(seed: number) {
+  const x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+}
+
 const LoadingScreen = () => {
   const [phase, setPhase] = useState<Phase>("forming");
+  const cubeRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+  const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
   // Generate cubes for MRI letters
   const cubes = useMemo(() => {
@@ -94,163 +94,118 @@ const LoadingScreen = () => {
     }));
   }, []);
 
-  // Animation sequence controller
+  // Pre-compute stable random values for horizontal dispersion
+  const randomValues = useMemo(() => {
+    const values: Record<
+      string,
+      {
+        disperseX: number;
+        fallDistance: number;
+        rotation: number;
+      }
+    > = {};
+
+    cubes.forEach((cube, index) => {
+      const seed = index * 7 + cube.row * 13 + cube.col * 17;
+      values[cube.id] = {
+        disperseX: (seededRandom(seed) - 0.5) * 60, // Small horizontal spread
+        fallDistance: 400 + seededRandom(seed + 1) * 200, // Fall downward 400-600px
+        rotation: (seededRandom(seed + 2) - 0.5) * 180,
+      };
+    });
+
+    return values;
+  }, [cubes]);
+
+  // GSAP animation sequence
   useEffect(() => {
-    const runSequence = async () => {
+    const runAnimation = () => {
+      if (timelineRef.current) {
+        timelineRef.current.kill();
+      }
+
+      const tl = gsap.timeline({
+        repeat: -1,
+        repeatDelay: 0.5,
+      });
+
+      // Phase 1: Forming - cubes drop in from top
       setPhase("forming");
-      await new Promise((r) => setTimeout(r, 1000));
+      cubes.forEach((cube) => {
+        const element = cubeRefs.current.get(cube.id);
+        if (element) {
+          tl.fromTo(
+            element,
+            {
+              x: cube.x,
+              y: cube.y - 60,
+              opacity: 0,
+              scale: 0.3,
+              rotation: 0,
+            },
+            {
+              x: cube.x,
+              y: cube.y,
+              opacity: 1,
+              scale: 1,
+              rotation: 0,
+              duration: 0.8,
+              ease: "back.out(1.7)",
+              delay: cube.delay,
+            },
+            0
+          );
+        }
+      });
 
-      setPhase("stable");
-      await new Promise((r) => setTimeout(r, 1000));
+      // Phase 2: Stable hold
+      tl.call(() => setPhase("stable"));
+      tl.to({}, { duration: 1.0 });
 
-      setPhase("cracking");
-      await new Promise((r) => setTimeout(r, 500));
+      // Phase 3: Breaking - particles fall down and sideways
+      tl.call(() => setPhase("breaking"));
+      cubes.forEach((cube) => {
+        const element = cubeRefs.current.get(cube.id);
+        if (element) {
+          const random = randomValues[cube.id];
 
-      setPhase("falling");
-      await new Promise((r) => setTimeout(r, 600));
+          // Break apart and fall downward with gravity
+          tl.to(
+            element,
+            {
+              x: cube.x + random.disperseX,
+              y: cube.y + random.fallDistance, // Fall downward
+              rotation: random.rotation,
+              scale: 0.3,
+              opacity: 0,
+              duration: 1.4,
+              ease: "power1.in", // Gravity acceleration
+              delay: cube.delay * 0.3,
+            },
+            2
+          );
+        }
+      });
 
-      setPhase("shattering");
-      await new Promise((r) => setTimeout(r, 400));
+      // Phase 4: Reset
+      tl.call(() => setPhase("reset"));
+      tl.to({}, { duration: 0.4 });
 
-      setPhase("vanishing");
-      await new Promise((r) => setTimeout(r, 1200));
-
-      setPhase("reset");
-      await new Promise((r) => setTimeout(r, 300));
+      timelineRef.current = tl;
     };
 
-    runSequence();
-    const interval = setInterval(runSequence, 5000);
-    return () => clearInterval(interval);
-  }, []);
+    runAnimation();
 
-  // Unified animation function for each cube
-  const getCubeStyle = (cube: Cube) => {
-    const baseDelay = cube.delay;
-    const fallOffset = 150 + cube.row * 20 + Math.sin(cube.col) * 30;
-    const disperseX = (Math.random() - 0.5) * 300;
-    const disperseY = 200 + Math.random() * 100;
-    const rotation = (Math.random() - 0.5) * 180;
+    return () => {
+      if (timelineRef.current) {
+        timelineRef.current.kill();
+      }
+    };
+  }, [cubes, randomValues]);
 
-    switch (phase) {
-      case "forming":
-        return {
-          x: cube.x,
-          y: cube.y - 40,
-          opacity: 0,
-          scale: 0.6,
-          rotate: 0,
-        };
-      case "stable":
-        return {
-          x: cube.x,
-          y: cube.y,
-          opacity: 1,
-          scale: 1,
-          rotate: 0,
-        };
-      case "cracking":
-        return {
-          x: cube.x + (Math.random() - 0.5) * 2,
-          y: cube.y + (Math.random() - 0.5) * 2,
-          opacity: 1,
-          scale: 1,
-          rotate: (Math.random() - 0.5) * 3,
-        };
-      case "falling":
-        return {
-          x: cube.x + (Math.random() - 0.5) * 8,
-          y: cube.y + fallOffset,
-          opacity: 1,
-          scale: 0.9,
-          rotate: (Math.random() - 0.5) * 15,
-        };
-      case "shattering":
-        return {
-          x: cube.x + disperseX * 0.3,
-          y: cube.y + fallOffset + 30,
-          opacity: 1,
-          scale: 0.7,
-          rotate: rotation * 0.5,
-        };
-      case "vanishing":
-        return {
-          x: cube.x + disperseX,
-          y: cube.y + disperseY + fallOffset,
-          opacity: 0,
-          scale: 0,
-          rotate: rotation,
-        };
-      case "reset":
-        return {
-          x: cube.x,
-          y: cube.y - 40,
-          opacity: 0,
-          scale: 0.6,
-          rotate: 0,
-        };
-      default:
-        return {
-          x: cube.x,
-          y: cube.y,
-          opacity: 1,
-          scale: 1,
-          rotate: 0,
-        };
-    }
-  };
-
-  const getTransition = (cube: Cube): Transition => {
-    const baseDelay = cube.delay;
-
-    switch (phase) {
-      case "forming":
-        return {
-          duration: 0.6,
-          delay: baseDelay,
-          ease: [0.34, 1.56, 0.64, 1] as EasingArray,
-        };
-      case "stable":
-        return {
-          duration: 0.5,
-          delay: baseDelay * 0.5,
-          ease: [0.25, 0.1, 0.25, 1] as EasingArray,
-        };
-      case "cracking":
-        return {
-          duration: 0.15,
-          delay: 0,
-          ease: "easeOut" as const,
-        };
-      case "falling":
-        return {
-          duration: 0.8,
-          delay: baseDelay * 0.3,
-          ease: [0.55, 0.055, 0.675, 0.19] as EasingArray,
-        };
-      case "shattering":
-        return {
-          duration: 0.4,
-          delay: baseDelay * 0.2,
-          ease: [0.25, 0.1, 0.25, 1] as EasingArray,
-        };
-      case "vanishing":
-        return {
-          duration: 1,
-          delay: baseDelay * 0.3,
-          ease: [0.25, 0.1, 0.25, 1] as EasingArray,
-        };
-      case "reset":
-        return {
-          duration: 0,
-          delay: 0,
-        };
-      default:
-        return {
-          duration: 0.5,
-          delay: baseDelay,
-          ease: [0.25, 0.1, 0.25, 1] as EasingArray,
-        };
+  const setCubeRef = (id: string) => (el: HTMLDivElement | null) => {
+    if (el) {
+      cubeRefs.current.set(id, el);
     }
   };
 
@@ -266,9 +221,10 @@ const LoadingScreen = () => {
           }}
         >
           {cubes.map((cube) => (
-            <motion.div
+            <div
               key={cube.id}
-              className="absolute bg-foreground origin-center"
+              ref={setCubeRef(cube.id)}
+              className="absolute bg-foreground origin-center will-change-transform"
               style={{
                 width: CUBE_SIZE,
                 height: CUBE_SIZE,
@@ -277,36 +233,24 @@ const LoadingScreen = () => {
                 marginLeft: -CUBE_SIZE / 2,
                 marginTop: -CUBE_SIZE / 2,
               }}
-              animate={getCubeStyle(cube)}
-              transition={getTransition(cube)}
             />
           ))}
         </div>
       </div>
 
       {/* Subtle loading dots */}
-      <motion.div
-        className="absolute bottom-16 flex gap-1.5"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.4 }}
-        transition={{ delay: 0.5 }}
-      >
+      <div className="absolute bottom-16 flex gap-1.5">
         {[0, 1, 2].map((i) => (
-          <motion.div
+          <div
             key={i}
-            className="w-1.5 h-1.5 bg-muted-foreground"
-            animate={{
-              opacity: [0.3, 1, 0.3],
-            }}
-            transition={{
-              duration: 1.2,
-              repeat: Infinity,
-              delay: i * 0.2,
-              ease: "easeInOut",
+            className="w-1.5 h-1.5 bg-muted-foreground rounded-full animate-pulse"
+            style={{
+              animationDelay: `${i * 200}ms`,
+              animationDuration: "1200ms",
             }}
           />
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 };

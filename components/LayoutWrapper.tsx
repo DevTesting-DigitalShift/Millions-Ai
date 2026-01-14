@@ -22,20 +22,17 @@ export default function LayoutWrapper({
   return (
     <SmoothScrollProvider>
       <div className="relative">
-        {/* Morphing shape overlay - must be outside CurtainWrapper for fixed positioning to work */}
+        <Header />
         <MorphingShape />
 
-        {/* Fixed Footer at the bottom */}
         <div className="fixed bottom-0 left-0 right-0 z-0">
           <Footer />
         </div>
 
-        {/* Curtain content that lifts up */}
         <CurtainWrapper>
           <div className="min-h-screen">
-            <Header />
+            <div className="h-[88px]" />
             {children}
-            {/* Spacer to create scroll space for the curtain effect */}
             <div className="h-screen" />
           </div>
         </CurtainWrapper>

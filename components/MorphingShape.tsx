@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useLayoutEffect } from "react";
+import { useEffect, useRef, useLayoutEffect, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { usePathname } from "next/navigation";
@@ -12,6 +12,7 @@ export default function MorphingShape() {
   const pathname = usePathname();
   const shapeRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
+  const [shapePosition, setShapePosition] = useState({ x: 0, y: 0 });
 
   // Initialize Lenis smooth scroll
   useEffect(() => {
@@ -67,15 +68,40 @@ export default function MorphingShape() {
           start: "top top",
           end: "+=10000",
           scrub: 2,
+          onUpdate: (self) => {
+            // Track position for spacing calculation
+            if (shape) {
+              const rect = shape.getBoundingClientRect();
+              setShapePosition({ x: rect.left, y: rect.top });
+            }
+          },
         },
       });
 
       tl
-        // Phase 1: Square → Diamond (rotate 45°, filled)
+        // Phase 1: Start from logo position (top-left)
         .to(
           shape,
-          { x: "15vw", y: "5vh", duration: 1.5, ease: "power2.inOut" },
+          { x: "0vw", y: "0vh", duration: 0.5, ease: "power2.inOut" },
           0
+        )
+        .to(
+          inner,
+          {
+            scale: 0.8,
+            rotation: 0,
+            borderRadius: "0%",
+            duration: 0.5,
+            ease: "power2.inOut",
+          },
+          0
+        )
+
+        // Phase 2: Square → Diamond (rotate 45°, filled)
+        .to(
+          shape,
+          { x: "15vw", y: "8vh", duration: 1.5, ease: "power2.inOut" },
+          0.5
         )
         .to(
           inner,
@@ -86,14 +112,14 @@ export default function MorphingShape() {
             duration: 1.5,
             ease: "power2.inOut",
           },
-          0
+          0.5
         )
 
-        // Phase 2: Diamond → Rhombus (scale stretch, outline)
+        // Phase 3: Diamond → Rhombus (scale stretch, outline)
         .to(
           shape,
-          { x: "10vw", y: "25vh", duration: 1.5, ease: "power2.inOut" },
-          1.5
+          { x: "10vw", y: "28vh", duration: 1.5, ease: "power2.inOut" },
+          2
         )
         .to(
           inner,
@@ -105,14 +131,14 @@ export default function MorphingShape() {
             duration: 1.5,
             ease: "power2.inOut",
           },
-          1.5
+          2
         )
 
-        // Phase 3: Rhombus → Rectangle (rotate back, wider)
+        // Phase 4: Rhombus → Rectangle (rotate back, wider)
         .to(
           shape,
-          { x: "35vw", y: "15vh", duration: 1.5, ease: "power2.inOut" },
-          3
+          { x: "35vw", y: "18vh", duration: 1.5, ease: "power2.inOut" },
+          3.5
         )
         .to(
           inner,
@@ -125,14 +151,14 @@ export default function MorphingShape() {
             duration: 1.5,
             ease: "power2.inOut",
           },
-          3
+          3.5
         )
 
-        // Phase 4: Rectangle → Small Square (shrink)
+        // Phase 5: Rectangle → Small Square (shrink)
         .to(
           shape,
-          { x: "50vw", y: "35vh", duration: 1.5, ease: "power2.inOut" },
-          4.5
+          { x: "50vw", y: "38vh", duration: 1.5, ease: "power2.inOut" },
+          5
         )
         .to(
           inner,
@@ -144,14 +170,14 @@ export default function MorphingShape() {
             duration: 1.5,
             ease: "power2.inOut",
           },
-          4.5
+          5
         )
 
-        // Phase 5: Small Square → Rotated Diamond (outline)
+        // Phase 6: Small Square → Rotated Diamond (outline)
         .to(
           shape,
-          { x: "20vw", y: "50vh", duration: 1.5, ease: "power2.inOut" },
-          6
+          { x: "20vw", y: "52vh", duration: 1.5, ease: "power2.inOut" },
+          6.5
         )
         .to(
           inner,
@@ -164,14 +190,14 @@ export default function MorphingShape() {
             duration: 1.5,
             ease: "power2.inOut",
           },
-          6
+          6.5
         )
 
-        // Phase 6: Diamond → Tall Rectangle (rotate, stretch vertical)
+        // Phase 7: Diamond → Tall Rectangle (rotate, stretch vertical)
         .to(
           shape,
-          { x: "8vw", y: "30vh", duration: 1.5, ease: "power2.inOut" },
-          7.5
+          { x: "8vw", y: "35vh", duration: 1.5, ease: "power2.inOut" },
+          8
         )
         .to(
           inner,
@@ -184,14 +210,14 @@ export default function MorphingShape() {
             duration: 1.5,
             ease: "power2.inOut",
           },
-          7.5
+          8
         )
 
-        // Phase 7: Tall Rectangle → Rounded Square
+        // Phase 8: Tall Rectangle → Rounded Square
         .to(
           shape,
-          { x: "40vw", y: "55vh", duration: 1.5, ease: "power2.inOut" },
-          9
+          { x: "40vw", y: "58vh", duration: 1.5, ease: "power2.inOut" },
+          9.5
         )
         .to(
           inner,
@@ -202,14 +228,14 @@ export default function MorphingShape() {
             duration: 1.5,
             ease: "power2.inOut",
           },
-          9
+          9.5
         )
 
-        // Phase 8: Rounded Square → Final Diamond (outline)
+        // Phase 9: Rounded Square → Final Diamond (outline)
         .to(
           shape,
-          { x: "25vw", y: "65vh", duration: 1.5, ease: "power2.inOut" },
-          10.5
+          { x: "25vw", y: "68vh", duration: 1.5, ease: "power2.inOut" },
+          11
         )
         .to(
           inner,
@@ -222,14 +248,14 @@ export default function MorphingShape() {
             duration: 1.5,
             ease: "power2.inOut",
           },
-          10.5
+          11
         )
 
-        // Phase 9: Final Diamond → Return to Square
+        // Phase 10: Final Diamond → Return to Square
         .to(
           shape,
-          { x: "30vw", y: "75vh", duration: 1.5, ease: "power2.inOut" },
-          12
+          { x: "30vw", y: "78vh", duration: 1.5, ease: "power2.inOut" },
+          12.5
         )
         .to(
           inner,
@@ -242,7 +268,7 @@ export default function MorphingShape() {
             duration: 1.5,
             ease: "power2.inOut",
           },
-          12
+          12.5
         );
     });
 
@@ -252,28 +278,43 @@ export default function MorphingShape() {
   if (pathname !== "/") return null;
 
   return (
-    <div
-      ref={shapeRef}
-      className="fixed left-8 top-[20vh] pointer-events-none"
-      style={{
-        willChange: "transform",
-        perspective: "1000px",
-        zIndex: 9999,
-      }}
-    >
-      {/* Single morphing shape */}
+    <>
+      {/* Morphing shape */}
       <div
-        ref={innerRef}
-        className="relative h-20 w-20"
+        ref={shapeRef}
+        className="fixed left-8 top-[6vh] pointer-events-none"
         style={{
-          willChange:
-            "transform, background-color, border-radius, border-width",
-          transformStyle: "preserve-3d",
-          borderStyle: "solid",
-          borderColor: "#0a0a0a",
-          backgroundColor: "#0a0a0a",
+          willChange: "transform",
+          perspective: "1000px",
+          zIndex: 40, // Below header (z-50) but above content
+        }}
+      >
+        {/* Single morphing shape */}
+        <div
+          ref={innerRef}
+          className="relative h-20 w-20"
+          style={{
+            willChange:
+              "transform, background-color, border-radius, border-width",
+            transformStyle: "preserve-3d",
+            borderStyle: "solid",
+            borderColor: "#0a0a0a",
+            backgroundColor: "#0a0a0a",
+          }}
+        />
+      </div>
+
+      {/* Invisible spacer that pushes content when shape overlaps */}
+      <div
+        className="fixed pointer-events-none"
+        style={{
+          left: shapePosition.x,
+          top: shapePosition.y,
+          width: "120px",
+          height: "120px",
+          zIndex: 35,
         }}
       />
-    </div>
+    </>
   );
 }
